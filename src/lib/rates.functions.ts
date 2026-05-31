@@ -58,7 +58,8 @@ export const getRates = createServerFn({ method: "GET" }).handler(async (): Prom
   };
 
   if (!key) {
-    return { ...empty, error: "Kur bilgisi şu an alınamıyor" };
+    console.error("[rates] COLLECTAPI_KEY env var is missing");
+    return { ...empty, error: "API anahtarı tanımlı değil" };
   }
 
   const headers = {
@@ -73,11 +74,22 @@ export const getRates = createServerFn({ method: "GET" }).handler(async (): Prom
     ]);
 
     if (!goldRes.ok || !fxRes.ok) {
-      return { ...empty, error: "Kur bilgisi şu an alınamıyor" };
+      const goldText = await goldRes.text().catch(() => "");
+      const fxText = await fxRes.text().catch(() => "");
+      console.error("[rates] CollectAPI HTTP error", {
+        gold: { status: goldRes.status, body: goldText.slice(0, 300) },
+        fx: { status: fxRes.status, body: fxText.slice(0, 300) },
+      });
+      return { ...empty, error: `Kur servisi hatası (${goldRes.status}/${fxRes.status})` };
     }
 
-    const goldJson = (await goldRes.json()) as { result?: CollectApiItem[] };
-    const fxJson = (await fxRes.json()) as { result?: CollectApiItem[] };
+    const goldJson = (await goldRes.json()) as { result?: CollectApiItem[]; success?: boolean };
+    const fxJson = (await fxRes.json()) as { result?: CollectApiItem[]; success?: boolean };
+    console.log("[rates] CollectAPI ok", {
+      goldCount: goldJson.result?.length ?? 0,
+      fxCount: fxJson.result?.length ?? 0,
+      sampleGold: goldJson.result?.slice(0, 3),
+    });
 
     const goldItems = (goldJson.result ?? []).filter((it) => GOLD_LABELS[it.name as string]);
     const gold: GoldRate[] = Object.keys(GOLD_LABELS).map((slug) => {
