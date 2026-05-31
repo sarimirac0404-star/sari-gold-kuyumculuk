@@ -26,6 +26,15 @@ const GOLD_LABELS: Record<string, string> = {
   "ceyrek-altin": "Çeyrek Altın",
   "yarim-altin": "Yarım Altın",
   "tam-altin": "Tam Altın",
+  "ikibucuk-altin": "İki Buçuklu Altın",
+  "besli-altin": "Beşli Altın",
+  "cumhuriyet-altini": "Cumhuriyet Altını",
+  "ata-altin": "Ata Altın",
+  "ata-5-li": "Ata Beşli",
+  "resat-altini": "Reşat Altını",
+  "resat-5-li": "Reşat Beşli",
+  "hamit-altini": "Hamit Altını",
+  "gremse-altin": "Gremse Altın",
 };
 
 const CURRENCY_LABELS: Record<string, string> = {
