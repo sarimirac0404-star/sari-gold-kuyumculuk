@@ -1,9 +1,5 @@
-const CATS = [
-  { icon: "💍", name: "Yüzükler", desc: "Nişan & Pırlanta" },
-  { icon: "📿", name: "Kolyeler", desc: "Zarif Tasarımlar" },
-  { icon: "⌚", name: "Bilezikler", desc: "El İşçiliği" },
-  { icon: "🪙", name: "Altın & Külçe", desc: "Yatırımlık Değerler" },
-];
+import { Link } from "@tanstack/react-router";
+import { CATEGORIES } from "@/lib/products";
 
 export function Categories() {
   return (
@@ -15,18 +11,22 @@ export function Categories() {
             Ürün Kategorileri
           </h2>
           <div className="mt-4 mx-auto w-24 h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
+          <p className="font-serif italic text-muted-foreground mt-4">
+            Kategoriye tıklayın, ürünleri keşfedin
+          </p>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-          {CATS.map((c, i) => (
-            <div
-              key={c.name}
-              className="group reveal relative aspect-[3/4] bg-card border border-border hover:border-primary transition-all duration-500 hover:-translate-y-2 hover:shadow-gold-strong overflow-hidden cursor-pointer"
+          {CATEGORIES.map((c, i) => (
+            <Link
+              key={c.slug}
+              to="/kategori/$slug"
+              params={{ slug: c.slug }}
+              className="group reveal relative aspect-[3/4] bg-card border border-border hover:border-primary transition-all duration-500 hover:-translate-y-2 hover:shadow-gold-strong overflow-hidden cursor-pointer block"
               style={{ transitionDelay: `${i * 80}ms` }}
             >
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {/* Corner ornaments */}
               <span className="absolute top-3 left-3 text-primary/60 group-hover:text-primary transition-colors">◆</span>
               <span className="absolute top-3 right-3 text-primary/60 group-hover:text-primary transition-colors">◆</span>
               <span className="absolute bottom-3 left-3 text-primary/60 group-hover:text-primary transition-colors">◆</span>
@@ -41,8 +41,11 @@ export function Categories() {
                 </h3>
                 <p className="font-serif italic text-sm text-muted-foreground mt-1">{c.desc}</p>
                 <div className="mt-5 h-px w-10 bg-primary/50 group-hover:w-20 transition-all duration-500" />
+                <div className="mt-3 font-ui text-[10px] text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                  Ürünleri Gör →
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
