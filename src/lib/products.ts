@@ -37,15 +37,15 @@ export const CATEGORIES: Category[] = [
     products: [
       {
         id: "yuzuk-1",
-        name: "Tek Taş Pırlanta Yüzük",
-        description: "0.50 ct - 14 ayar altın",
-        image: "/products/tek-tas-pirlanta.jpg",
+        name: "Telkari Altın Yüzük",
+        description: "El işçiliği telkari - 22 ayar altın",
+        image: "/products/yuzuk-1.jpg",
       },
       {
         id: "yuzuk-2",
-        name: "Alyans Modeli",
-        description: "8 mm genişlik - 14 ayar",
-        image: "/products/alyans-modeli.jpg",
+        name: "Gül Motifli Telkari Yüzük",
+        description: "Üç boyutlu gül tasarımı - 22 ayar altın",
+        image: "/products/yuzuk-2.jpg",
       },
       ...placeholders("Yüzük", 4),
     ],
