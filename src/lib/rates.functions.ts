@@ -44,10 +44,6 @@ const GOLD_MAP: Array<[string, string]> = [
 const CURRENCY_MAP: Array<[string, string]> = [
   ["USD", "Dolar"],
   ["EUR", "Euro"],
-  ["GBP", "Sterlin"],
-  ["CHF", "İsviçre Frangı"],
-  ["SAR", "Suudi Riyali"],
-  ["AED", "BAE Dirhemi"],
 ];
 
 export const getRates = createServerFn({ method: "GET" }).handler(
