@@ -92,13 +92,13 @@ export function RatesSection() {
                 <span className="absolute inline-flex h-full w-full rounded-full bg-success pulse-dot" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
               </span>
-              <span className="font-ui text-[10px] text-success">Canlı</span>
+              <span className="font-ui text-[10px] text-success uppercase tracking-widest">Canlı</span>
             </div>
             <h2 className="font-display text-4xl md:text-5xl text-gradient-gold">
-              Anlık Altın & Döviz
+              Sarı Gold Kuyumculuk Canlı Kur
             </h2>
             <p className="font-serif text-lg text-muted-foreground mt-2 italic">
-              Güncel piyasa değerleri — anlık takip
+              Anlık altın, gümüş ve döviz fiyatları
             </p>
           </div>
           <div className="font-ui text-[10px] text-muted-foreground">
