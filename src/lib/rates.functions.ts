@@ -46,6 +46,44 @@ const CURRENCY_MAP: Array<[string, string]> = [
   ["EUR", "Euro"],
 ];
 
+// ============================================================
+// FİYAT FARKLARI (TL cinsinden) — Harem Altın fiyatına eklenir
+// Pozitif değer = üstünde, Negatif değer = altında
+// Sadece bu sayıları değiştirerek farkları ayarlayabilirsiniz.
+// ============================================================
+const OFFSETS: Record<string, { buying: number; selling: number }> = {
+  // Altın
+  "Gram Altın":         { buying: 0, selling: 0 },
+  "Has Altın":          { buying: 0, selling: 0 },
+  "Çeyrek Altın":       { buying: 0, selling: 0 },
+  "Yarım Altın":        { buying: 0, selling: 0 },
+  "Tam Altın":          { buying: 0, selling: 0 },
+  "Cumhuriyet Altını":  { buying: 0, selling: 0 },
+  "Ata Altın":          { buying: 0, selling: 0 },
+  "Reşat Altın":        { buying: 0, selling: 0 },
+  "Hamit Altın":        { buying: 0, selling: 0 },
+  "İki Buçuk Altın":    { buying: 0, selling: 0 },
+  "Beşli Altın":        { buying: 0, selling: 0 },
+  "Gremse Altın":       { buying: 0, selling: 0 },
+  "22 Ayar Bilezik":    { buying: 0, selling: 0 },
+  "18 Ayar Altın":      { buying: 0, selling: 0 },
+  "14 Ayar Altın":      { buying: 0, selling: 0 },
+  "Gümüş":              { buying: 0, selling: 0 },
+  // Döviz
+  "Dolar":              { buying: 0, selling: 0 },
+  "Euro":               { buying: 0, selling: 0 },
+};
+
+function applyOffset(rate: GoldRate): GoldRate {
+  const off = OFFSETS[rate.name];
+  if (!off || (rate.buying === 0 && rate.selling === 0)) return rate;
+  return {
+    ...rate,
+    buying: rate.buying ? rate.buying + off.buying : rate.buying,
+    selling: rate.selling ? rate.selling + off.selling : rate.selling,
+  };
+}
+
 export const getRates = createServerFn({ method: "GET" }).handler(
   async (): Promise<RatesPayload> => {
     const empty: RatesPayload = {
