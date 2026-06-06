@@ -46,36 +46,32 @@ const CURRENCY_MAP: Array<[string, string]> = [
   ["EUR", "Euro"],
 ];
 
-// ============================================================
-// FİYAT FARKLARI (TL cinsinden) — Harem Altın fiyatına eklenir
-// Pozitif değer = üstünde, Negatif değer = altında
-// Sadece bu sayıları değiştirerek farkları ayarlayabilirsiniz.
-// ============================================================
-const OFFSETS: Record<string, { buying: number; selling: number }> = {
-  // Altın
-  "Gram Altın":         { buying: 0, selling: 0 },
-  "Has Altın":          { buying: 0, selling: 0 },
-  "Çeyrek Altın":       { buying: 0, selling: 0 },
-  "Yarım Altın":        { buying: 0, selling: 0 },
-  "Tam Altın":          { buying: 0, selling: 0 },
-  "Cumhuriyet Altını":  { buying: 0, selling: 0 },
-  "Ata Altın":          { buying: 0, selling: 0 },
-  "Reşat Altın":        { buying: 0, selling: 0 },
-  "Hamit Altın":        { buying: 0, selling: 0 },
-  "İki Buçuk Altın":    { buying: 0, selling: 0 },
-  "Beşli Altın":        { buying: 0, selling: 0 },
-  "Gremse Altın":       { buying: 0, selling: 0 },
-  "22 Ayar Bilezik":    { buying: 0, selling: 0 },
-  "18 Ayar Altın":      { buying: 0, selling: 0 },
-  "14 Ayar Altın":      { buying: 0, selling: 0 },
-  "Gümüş":              { buying: 0, selling: 0 },
-  // Döviz
-  "Dolar":              { buying: 0, selling: 0 },
-  "Euro":               { buying: 0, selling: 0 },
-};
+// Fiyat farkları (offset'ler) /admin sayfasından yönetilir ve veritabanından okunur.
+async function loadOffsets(): Promise<Record<string, { buying: number; selling: number }>> {
+  try {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data, error } = await supabaseAdmin
+      .from("rate_offsets")
+      .select("item_name, buying_offset, selling_offset");
+    if (error || !data) return {};
+    const map: Record<string, { buying: number; selling: number }> = {};
+    for (const r of data) {
+      map[r.item_name] = {
+        buying: Number(r.buying_offset) || 0,
+        selling: Number(r.selling_offset) || 0,
+      };
+    }
+    return map;
+  } catch {
+    return {};
+  }
+}
 
-function applyOffset(rate: GoldRate): GoldRate {
-  const off = OFFSETS[rate.name];
+function applyOffset(
+  rate: GoldRate,
+  offsets: Record<string, { buying: number; selling: number }>,
+): GoldRate {
+  const off = offsets[rate.name];
   if (!off || (rate.buying === 0 && rate.selling === 0)) return rate;
   return {
     ...rate,
@@ -83,6 +79,7 @@ function applyOffset(rate: GoldRate): GoldRate {
     selling: rate.selling ? rate.selling + off.selling : rate.selling,
   };
 }
+
 
 export const getRates = createServerFn({ method: "GET" }).handler(
   async (): Promise<RatesPayload> => {
@@ -112,12 +109,13 @@ export const getRates = createServerFn({ method: "GET" }).handler(
         };
       };
 
+      const offsets = await loadOffsets();
       const gold = GOLD_MAP.map(([k, l]) => pick(k, l))
         .filter((r) => r.buying > 0 || r.selling > 0)
-        .map(applyOffset);
+        .map((r) => applyOffset(r, offsets));
       const currency = CURRENCY_MAP.map(([k, l]) => pick(k, l))
         .filter((r) => r.buying > 0 || r.selling > 0)
-        .map(applyOffset);
+        .map((r) => applyOffset(r, offsets));
 
       return {
         gold,
