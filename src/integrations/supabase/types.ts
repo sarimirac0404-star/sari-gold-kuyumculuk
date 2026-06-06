@@ -14,7 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      rate_offsets: {
+        Row: {
+          buying_offset: number
+          item_name: string
+          selling_offset: number
+          updated_at: string
+        }
+        Insert: {
+          buying_offset?: number
+          item_name: string
+          selling_offset?: number
+          updated_at?: string
+        }
+        Update: {
+          buying_offset?: number
+          item_name?: string
+          selling_offset?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
