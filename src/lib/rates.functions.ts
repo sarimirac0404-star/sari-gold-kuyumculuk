@@ -109,12 +109,13 @@ export const getRates = createServerFn({ method: "GET" }).handler(
         };
       };
 
+      const offsets = await loadOffsets();
       const gold = GOLD_MAP.map(([k, l]) => pick(k, l))
         .filter((r) => r.buying > 0 || r.selling > 0)
-        .map(applyOffset);
+        .map((r) => applyOffset(r, offsets));
       const currency = CURRENCY_MAP.map(([k, l]) => pick(k, l))
         .filter((r) => r.buying > 0 || r.selling > 0)
-        .map(applyOffset);
+        .map((r) => applyOffset(r, offsets));
 
       return {
         gold,
