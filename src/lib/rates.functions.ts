@@ -112,12 +112,12 @@ export const getRates = createServerFn({ method: "GET" }).handler(
         };
       };
 
-      const gold = GOLD_MAP.map(([k, l]) => pick(k, l)).filter(
-        (r) => r.buying > 0 || r.selling > 0,
-      );
-      const currency = CURRENCY_MAP.map(([k, l]) => pick(k, l)).filter(
-        (r) => r.buying > 0 || r.selling > 0,
-      );
+      const gold = GOLD_MAP.map(([k, l]) => pick(k, l))
+        .filter((r) => r.buying > 0 || r.selling > 0)
+        .map(applyOffset);
+      const currency = CURRENCY_MAP.map(([k, l]) => pick(k, l))
+        .filter((r) => r.buying > 0 || r.selling > 0)
+        .map(applyOffset);
 
       return {
         gold,
