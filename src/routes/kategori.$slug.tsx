@@ -202,6 +202,12 @@ function CategoryPage() {
         </div>
       </section>
 
+      <ProductDialog
+        product={selected}
+        open={!!selected}
+        onOpenChange={(o) => !o && setSelected(null)}
+      />
+
       <Footer />
       <WhatsAppFloat />
     </main>
