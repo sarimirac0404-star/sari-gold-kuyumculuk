@@ -178,7 +178,7 @@ function CategoryPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
             {category.products.map((p: Product) => (
-              <ProductCard key={p.id} product={p} />
+              <ProductCard key={p.id} product={p} onClick={() => setSelected(p)} />
             ))}
           </div>
 
