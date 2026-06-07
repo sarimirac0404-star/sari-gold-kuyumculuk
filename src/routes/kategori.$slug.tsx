@@ -1,8 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ImageIcon } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, ImageIcon, X } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { getCategory, CATEGORIES, type Product } from "@/lib/products";
 
 export const Route = createFileRoute("/kategori/$slug")({
