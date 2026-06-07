@@ -42,9 +42,13 @@ export const Route = createFileRoute("/kategori/$slug")({
   ),
 });
 
-function ProductCard({ product }: { product: Product }) {
+function ProductCard({ product, onClick }: { product: Product; onClick: () => void }) {
   return (
-    <div className="group relative bg-card border border-border hover:border-primary/60 transition-all duration-500 hover:-translate-y-1 hover:shadow-gold overflow-hidden">
+    <button
+      type="button"
+      onClick={onClick}
+      className="group relative bg-card border border-border hover:border-primary/60 transition-all duration-500 hover:-translate-y-1 hover:shadow-gold overflow-hidden text-left cursor-pointer"
+    >
       <div className="absolute top-0 left-0 w-12 h-px bg-gradient-to-r from-primary to-transparent" />
       <div className="absolute bottom-0 right-0 w-12 h-px bg-gradient-to-l from-primary to-transparent" />
 
@@ -71,8 +75,70 @@ function ProductCard({ product }: { product: Product }) {
         <p className="font-serif italic text-xs text-muted-foreground mt-1">
           {product.description}
         </p>
+        <div className="mt-3 font-ui text-[10px] text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+          Detayları Gör →
+        </div>
       </div>
-    </div>
+    </button>
+  );
+}
+
+function ProductDialog({
+  product,
+  open,
+  onOpenChange,
+}: {
+  product: Product | null;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-3xl bg-card border-primary/40 p-0 overflow-hidden">
+        {product && (
+          <div className="grid md:grid-cols-2 gap-0">
+            <div className="aspect-square bg-gradient-to-br from-background to-card flex items-center justify-center overflow-hidden">
+              {product.image ? (
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <div className="flex flex-col items-center gap-3 text-primary/40">
+                  <ImageIcon size={64} strokeWidth={1} />
+                  <span className="font-ui text-[10px] uppercase tracking-widest">
+                    Fotoğraf Yakında
+                  </span>
+                </div>
+              )}
+            </div>
+            <div className="p-8 flex flex-col justify-center">
+              <div className="font-ui text-[10px] text-primary mb-3">Ürün Detayı</div>
+              <DialogTitle className="font-display text-2xl md:text-3xl text-gradient-gold">
+                {product.name}
+              </DialogTitle>
+              <div className="mt-3 w-16 h-px bg-gradient-to-r from-primary to-transparent" />
+              <DialogDescription className="font-serif italic text-base text-muted-foreground mt-4">
+                {product.description}
+              </DialogDescription>
+              <div className="mt-6 space-y-2 font-ui text-[11px] text-muted-foreground">
+                <p>• Detaylı bilgi ve fiyat için iletişime geçiniz.</p>
+                <p>• Mağazamızda yakından inceleyebilirsiniz.</p>
+              </div>
+              <a
+                href="https://wa.me/905555555555"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 bg-primary text-primary-foreground font-ui text-xs uppercase tracking-widest hover:bg-primary/90 transition-colors"
+              >
+                WhatsApp ile Sor
+              </a>
+            </div>
+          </div>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 }
 
