@@ -144,6 +144,8 @@ function ProductDialog({
 
 function CategoryPage() {
   const { category } = Route.useLoaderData();
+  const [selected, setSelected] = useState<Product | null>(null);
+
 
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
