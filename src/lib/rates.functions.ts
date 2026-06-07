@@ -14,39 +14,45 @@ export interface RatesPayload {
   error?: string | null;
 }
 
-interface TruncgilItem {
-  Buying: number;
-  Selling: number;
-  Change: number;
-  Type: string;
-  Name?: string;
+interface KurpanoItem {
+  Type: number; // 1=gold, 2=currency, 4=silver
+  ProductName: string;
+  TableSort: number;
+  RoundPurchasePrice: string;
+  RoundSalesPrice: string;
 }
 
-const GOLD_MAP: Array<[string, string]> = [
-  ["GRA", "Gram Altın"],
-  ["HAS", "Has Altın"],
-  ["CEYREKALTIN", "Çeyrek Altın"],
-  ["YARIMALTIN", "Yarım Altın"],
-  ["TAMALTIN", "Tam Altın"],
-  ["CUMHURIYETALTINI", "Cumhuriyet Altını"],
-  ["ATAALTIN", "Ata Altın"],
-  ["RESATALTIN", "Reşat Altın"],
-  ["HAMITALTIN", "Hamit Altın"],
-  ["IKIBUCUKALTIN", "İki Buçuk Altın"],
-  ["BESLIALTIN", "Beşli Altın"],
-  ["GREMSEALTIN", "Gremse Altın"],
-  ["22AYARBILEZIK", "22 Ayar Bilezik"],
-  ["18AYARALTIN", "18 Ayar Altın"],
-  ["14AYARALTIN", "14 Ayar Altın"],
-  ["GUMUS", "Gümüş"],
-];
+interface KurpanoResponse {
+  Status: boolean;
+  Value: KurpanoItem[];
+}
 
-const CURRENCY_MAP: Array<[string, string]> = [
-  ["USD", "Dolar"],
-  ["EUR", "Euro"],
-];
+// Sadece bu ürünler gösterilecek — kurpano.com/sarigold ile birebir aynı sıra.
+const ALLOWED = [
+  "EUR",
+  "USD",
+  "HAS ALTIN",
+  "24 AYAR 1 GR",
+  "22 AYAR BİLEZİK",
+  "ESKİ ATA LİRA",
+  "YENİ ATA LİRA",
+  "GÜMÜŞ",
+  "ESKİ ÇEYREK",
+  "ESKİ YARIM",
+  "ESKİ TAM",
+  "YENİ ÇEYREK",
+  "YENİ YARIM",
+  "YENİ TAM",
+] as const;
 
-// Fiyat farkları (offset'ler) /admin sayfasından yönetilir ve veritabanından okunur.
+function parseTrNumber(s: string): number {
+  if (!s) return 0;
+  // "6.466" -> 6466 ; "52,83" -> 52.83 ; "96,401" -> 96.401
+  const normalized = s.replace(/\./g, "").replace(",", ".");
+  const n = parseFloat(normalized);
+  return Number.isFinite(n) ? n : 0;
+}
+
 async function loadOffsets(): Promise<Record<string, { buying: number; selling: number }>> {
   try {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -72,14 +78,13 @@ function applyOffset(
   offsets: Record<string, { buying: number; selling: number }>,
 ): GoldRate {
   const off = offsets[rate.name];
-  if (!off || (rate.buying === 0 && rate.selling === 0)) return rate;
+  if (!off) return rate;
   return {
     ...rate,
     buying: rate.buying ? rate.buying + off.buying : rate.buying,
     selling: rate.selling ? rate.selling + off.selling : rate.selling,
   };
 }
-
 
 export const getRates = createServerFn({ method: "GET" }).handler(
   async (): Promise<RatesPayload> => {
@@ -91,31 +96,40 @@ export const getRates = createServerFn({ method: "GET" }).handler(
     };
 
     try {
-      const res = await fetch("https://finans.truncgil.com/v4/today.json", {
-        headers: { "user-agent": "Mozilla/5.0" },
-      });
+      const res = await fetch(
+        "https://kurpano.com/sarigold/GetCurrentCompanyProductPrice",
+        {
+          headers: {
+            "user-agent": "Mozilla/5.0",
+            accept: "application/json",
+            referer: "https://kurpano.com/sarigold",
+          },
+        },
+      );
       if (!res.ok) {
         return { ...empty, error: `Kur servisi hatası (${res.status})` };
       }
-      const data = (await res.json()) as Record<string, TruncgilItem | string>;
+      const data = (await res.json()) as KurpanoResponse;
+      if (!data?.Status || !Array.isArray(data.Value)) {
+        return { ...empty, error: "Kur bilgisi şu an alınamıyor" };
+      }
 
-      const pick = (key: string, label: string): GoldRate => {
-        const it = data[key] as TruncgilItem | undefined;
-        return {
-          name: label,
-          buying: it?.Buying ?? 0,
-          selling: it?.Selling ?? 0,
-          change: it?.Change,
-        };
-      };
+      const byName = new Map<string, KurpanoItem>();
+      for (const it of data.Value) byName.set(it.ProductName.trim(), it);
 
       const offsets = await loadOffsets();
-      const gold = GOLD_MAP.map(([k, l]) => pick(k, l))
-        .filter((r) => r.buying > 0 || r.selling > 0)
-        .map((r) => applyOffset(r, offsets));
-      const currency = CURRENCY_MAP.map(([k, l]) => pick(k, l))
-        .filter((r) => r.buying > 0 || r.selling > 0)
-        .map((r) => applyOffset(r, offsets));
+
+      const all: GoldRate[] = ALLOWED.map((name) => {
+        const it = byName.get(name);
+        return {
+          name,
+          buying: it ? parseTrNumber(it.RoundPurchasePrice) : 0,
+          selling: it ? parseTrNumber(it.RoundSalesPrice) : 0,
+        };
+      }).map((r) => applyOffset(r, offsets));
+
+      const currency = all.filter((r) => r.name === "EUR" || r.name === "USD");
+      const gold = all.filter((r) => r.name !== "EUR" && r.name !== "USD");
 
       return {
         gold,

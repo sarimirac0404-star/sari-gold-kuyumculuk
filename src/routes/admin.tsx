@@ -23,24 +23,20 @@ export const Route = createFileRoute("/admin")({
 });
 
 const ALL_ITEMS = [
-  "Gram Altın",
-  "Has Altın",
-  "Çeyrek Altın",
-  "Yarım Altın",
-  "Tam Altın",
-  "Cumhuriyet Altını",
-  "Ata Altın",
-  "Reşat Altın",
-  "Hamit Altın",
-  "İki Buçuk Altın",
-  "Beşli Altın",
-  "Gremse Altın",
-  "22 Ayar Bilezik",
-  "18 Ayar Altın",
-  "14 Ayar Altın",
-  "Gümüş",
-  "Dolar",
-  "Euro",
+  "EUR",
+  "USD",
+  "HAS ALTIN",
+  "24 AYAR 1 GR",
+  "22 AYAR BİLEZİK",
+  "ESKİ ATA LİRA",
+  "YENİ ATA LİRA",
+  "GÜMÜŞ",
+  "ESKİ ÇEYREK",
+  "ESKİ YARIM",
+  "ESKİ TAM",
+  "YENİ ÇEYREK",
+  "YENİ YARIM",
+  "YENİ TAM",
 ] as const;
 
 type FormState = Record<string, { buying: string; selling: string }>;
