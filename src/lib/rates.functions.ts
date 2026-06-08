@@ -97,7 +97,7 @@ export const getRates = createServerFn({ method: "GET" }).handler(
 
     try {
       const res = await fetch(
-        "https://kurpano.com/sarigold/GetCurrentCompanyProductPrice",
+        "https://kurpano.com/CustomHome/GetCurrentCompanyProductPrice",
         {
           headers: {
             "user-agent": "Mozilla/5.0",
