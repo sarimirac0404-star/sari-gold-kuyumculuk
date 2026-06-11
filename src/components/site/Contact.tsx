@@ -1,8 +1,10 @@
-import { MapPin, Phone, Clock, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Clock, MessageCircle, Instagram } from "lucide-react";
 
-const ADDRESS = "Cumhuriyet Cd., 04600 Eleşkirt/Ağrı";
+const ADDRESS = "Cumhuriyet, Cumhuriyet Cd., 04600 Eleşkirt/Ağrı";
 const PHONE = "+90 533 814 46 51";
 const WHATSAPP = "905338144651";
+const INSTAGRAM = "https://www.instagram.com/sarigold_kuyumculuk?igsh=eGFyamFlNTZrMG52";
+
 
 export function Contact() {
   return (
