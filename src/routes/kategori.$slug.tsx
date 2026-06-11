@@ -149,6 +149,23 @@ function ProductDialog({
 function CategoryPage() {
   const { category } = Route.useLoaderData();
   const [selected, setSelected] = useState<Product | null>(null);
+  const fetchProducts = useServerFn(listProducts);
+  const { data: dbProducts } = useQuery({
+    queryKey: ["products", category.slug],
+    queryFn: () => fetchProducts({ data: { category_slug: category.slug } }),
+    staleTime: 30_000,
+  });
+
+  const products: Product[] = (dbProducts && dbProducts.length > 0)
+    ? dbProducts.map((p) => ({
+        id: p.id,
+        name: p.name,
+        description: p.description,
+        image: p.image_url ?? "",
+      }))
+    : category.products;
+
+
 
 
   return (
