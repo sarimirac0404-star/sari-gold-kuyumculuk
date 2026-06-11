@@ -33,9 +33,10 @@ export function Categories() {
               <span className="absolute bottom-3 right-3 text-primary/60 group-hover:text-primary transition-colors">◆</span>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                <div className="text-5xl md:text-6xl mb-6 transition-transform duration-500 group-hover:scale-110">
-                  {c.icon}
+                <div className="text-5xl md:text-6xl mb-6 transition-transform duration-500 group-hover:scale-110 flex items-center justify-center">
+                  {c.slug === "bilezikler" ? <BraceletIcon /> : c.icon}
                 </div>
+
                 <h3 className="font-display text-xl md:text-2xl text-gold-pale group-hover:text-primary transition-colors">
                   {c.name}
                 </h3>
