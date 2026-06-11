@@ -69,9 +69,13 @@ export function RatesSection() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["rates"],
     queryFn: () => fetchRates(),
-    refetchInterval: 60_000,
-    refetchOnWindowFocus: false,
+    refetchInterval: 15_000,
+    refetchIntervalInBackground: true,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    staleTime: 0,
   });
+
 
   const allRates = data ? [...data.gold, ...data.currency] : [];
   const timestamp = data?.updatedAt
