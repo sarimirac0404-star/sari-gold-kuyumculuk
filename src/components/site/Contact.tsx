@@ -59,7 +59,18 @@ export function Contact() {
               <MessageCircle size={18} />
               WhatsApp ile İletişime Geçin
             </a>
+
+            <a
+              href={INSTAGRAM}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-center gap-3 w-full py-4 bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] text-white font-ui text-xs hover:opacity-90 transition-opacity"
+            >
+              <Instagram size={18} />
+              Instagram'da Takip Edin
+            </a>
           </div>
+
 
           <div className="reveal">
             <div className="relative h-full min-h-[420px] border border-primary/40 overflow-hidden">
