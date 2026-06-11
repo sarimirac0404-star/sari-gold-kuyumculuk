@@ -127,7 +127,7 @@ function ProductDialog({
                 <p>• Mağazamızda yakından inceleyebilirsiniz.</p>
               </div>
               <a
-                href="https://wa.me/905555555555"
+                href="https://wa.me/905338144651"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 bg-primary text-primary-foreground font-ui text-xs uppercase tracking-widest hover:bg-primary/90 transition-colors"
