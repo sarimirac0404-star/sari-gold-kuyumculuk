@@ -11,12 +11,13 @@ export type Product = {
 
 export type Category = {
   slug: string;
-  icon: import("react").ReactNode;
+  icon: string;
   name: string;
   desc: string;
   intro: string;
   products: Product[];
 };
+
 
 
 const placeholders = (prefix: string, count: number): Product[] =>
