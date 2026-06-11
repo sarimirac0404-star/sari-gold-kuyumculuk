@@ -18,6 +18,8 @@ export type Category = {
   products: Product[];
 };
 
+
+
 const placeholders = (prefix: string, count: number): Product[] =>
   Array.from({ length: count }).map((_, i) => ({
     id: `${prefix}-${i + 1}`,

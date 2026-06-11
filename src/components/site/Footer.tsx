@@ -15,7 +15,7 @@ export function Footer() {
 
         <div className="flex items-center gap-3">
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/sarigold_kuyumculuk?igsh=eGFyamFlNTZrMG52"
             target="_blank"
             rel="noreferrer"
             aria-label="Instagram"
@@ -24,7 +24,7 @@ export function Footer() {
             <Instagram size={16} />
           </a>
           <a
-            href="https://wa.me/905555555555"
+            href="https://wa.me/905338144651"
             target="_blank"
             rel="noreferrer"
             aria-label="WhatsApp"

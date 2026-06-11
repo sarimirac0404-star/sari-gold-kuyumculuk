@@ -1,8 +1,8 @@
 import { MapPin, Phone, Clock, MessageCircle } from "lucide-react";
 
 const ADDRESS = "Cumhuriyet Cd., 04600 Eleşkirt/Ağrı";
-const PHONE = "+90 555 555 55 55";
-const WHATSAPP = "905555555555";
+const PHONE = "+90 533 814 46 51";
+const WHATSAPP = "905338144651";
 
 export function Contact() {
   return (
