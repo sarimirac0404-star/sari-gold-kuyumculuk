@@ -1,11 +1,15 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { ArrowLeft, ImageIcon } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { getCategory, CATEGORIES, type Product } from "@/lib/products";
+import { listProducts } from "@/lib/products.functions";
+
 
 export const Route = createFileRoute("/kategori/$slug")({
   loader: ({ params }) => {
@@ -145,6 +149,23 @@ function ProductDialog({
 function CategoryPage() {
   const { category } = Route.useLoaderData();
   const [selected, setSelected] = useState<Product | null>(null);
+  const fetchProducts = useServerFn(listProducts);
+  const { data: dbProducts } = useQuery({
+    queryKey: ["products", category.slug],
+    queryFn: () => fetchProducts({ data: { category_slug: category.slug } }),
+    staleTime: 30_000,
+  });
+
+  const products: Product[] = (dbProducts && dbProducts.length > 0)
+    ? dbProducts.map((p) => ({
+        id: p.id,
+        name: p.name,
+        description: p.description,
+        image: p.image_url ?? "",
+      }))
+    : category.products;
+
+
 
 
   return (
@@ -177,7 +198,7 @@ function CategoryPage() {
       <section className="pb-28">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
-            {category.products.map((p: Product) => (
+            {products.map((p: Product) => (
               <ProductCard key={p.id} product={p} onClick={() => setSelected(p)} />
             ))}
           </div>

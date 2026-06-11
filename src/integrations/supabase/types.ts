@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      products: {
+        Row: {
+          category_slug: string
+          created_at: string
+          description: string
+          id: string
+          image_path: string | null
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          category_slug: string
+          created_at?: string
+          description?: string
+          id?: string
+          image_path?: string | null
+          name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          category_slug?: string
+          created_at?: string
+          description?: string
+          id?: string
+          image_path?: string | null
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       rate_offsets: {
         Row: {
           buying_offset: number
