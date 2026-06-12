@@ -149,6 +149,7 @@ function ProductDialog({
 function CategoryPage() {
   const { category } = Route.useLoaderData();
   const [selected, setSelected] = useState<Product | null>(null);
+  const [karat, setKarat] = useState<"22K" | "14K">("22K");
   const fetchProducts = useServerFn(listProducts);
   const { data: dbProducts } = useQuery({
     queryKey: ["products", category.slug],
@@ -156,14 +157,15 @@ function CategoryPage() {
     staleTime: 30_000,
   });
 
-  const products: Product[] = (dbProducts && dbProducts.length > 0)
-    ? dbProducts.map((p) => ({
+  const filtered = (dbProducts ?? []).filter((p) => p.karat === karat);
+  const products: Product[] = filtered.length > 0
+    ? filtered.map((p) => ({
         id: p.id,
         name: p.name,
         description: p.description,
         image: p.image_url ?? "",
       }))
-    : category.products;
+    : [];
 
 
 
