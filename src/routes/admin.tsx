@@ -504,6 +504,18 @@ function ProductDialog({
             </div>
           )}
           <div className="space-y-2">
+            <Label>Ayar</Label>
+            <Select value={karat} onValueChange={(v) => setKarat(v as "14K" | "22K")}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="22K">22 Ayar (22K)</SelectItem>
+                <SelectItem value="14K">14 Ayar (14K)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
             <Label>Ürün Adı</Label>
             <Input value={name} onChange={(e) => setName(e.target.value)} required maxLength={200} />
           </div>
