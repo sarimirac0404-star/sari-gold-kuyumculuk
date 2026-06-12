@@ -87,7 +87,7 @@ export function RatesSection() {
   const showError = isError || (data?.error && allRates.every((r) => r.buying === 0));
 
   return (
-    <section className="relative py-24 bg-gradient-to-b from-background via-card to-background">
+    <section id="canli-kur" className="relative py-24 bg-gradient-to-b from-background via-card to-background">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
           <div className="text-center md:text-left">
