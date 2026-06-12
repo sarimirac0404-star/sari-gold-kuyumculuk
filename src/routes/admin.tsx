@@ -406,6 +406,7 @@ function ProductDialog({
   const [categorySlug, setCategorySlug] = useState(
     initial?.category_slug ?? CATEGORIES[0].slug,
   );
+  const [karat, setKarat] = useState<"14K" | "22K">(initial?.karat ?? "22K");
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(initial?.image_url ?? null);
   const [removeImage, setRemoveImage] = useState(false);
