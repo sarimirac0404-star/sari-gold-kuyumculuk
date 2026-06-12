@@ -5,6 +5,8 @@ const ADMIN_PASSWORD = "325641";
 const BUCKET = "product-images";
 const SIGNED_URL_TTL = 60 * 60 * 24 * 365; // 1 year
 
+export type Karat = "14K" | "22K";
+
 export interface DbProduct {
   id: string;
   category_slug: string;
@@ -13,7 +15,10 @@ export interface DbProduct {
   image_path: string | null;
   image_url: string | null;
   sort_order: number;
+  karat: Karat;
 }
+
+const KaratSchema = z.enum(["14K", "22K"]);
 
 const SlugSchema = z.object({ category_slug: z.string().min(1).max(50) });
 
@@ -22,7 +27,8 @@ const AddSchema = z.object({
   category_slug: z.string().min(1).max(50),
   name: z.string().min(1).max(200),
   description: z.string().max(2000).default(""),
-  image_base64: z.string().optional(), // data URL or raw base64
+  karat: KaratSchema.default("22K"),
+  image_base64: z.string().optional(),
   image_filename: z.string().max(200).optional(),
   image_content_type: z.string().max(100).optional(),
 });
@@ -32,6 +38,7 @@ const UpdateSchema = z.object({
   id: z.string().uuid(),
   name: z.string().min(1).max(200),
   description: z.string().max(2000).default(""),
+  karat: KaratSchema.optional(),
   image_base64: z.string().optional(),
   image_filename: z.string().max(200).optional(),
   image_content_type: z.string().max(100).optional(),
