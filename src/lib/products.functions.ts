@@ -99,7 +99,7 @@ export const listProducts = createServerFn({ method: "POST" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: rows, error } = await supabaseAdmin
       .from("products")
-      .select("id, category_slug, name, description, image_path, sort_order")
+      .select("id, category_slug, name, description, image_path, sort_order, karat")
       .eq("category_slug", data.category_slug)
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: true });
@@ -114,7 +114,7 @@ export const adminListAllProducts = createServerFn({ method: "POST" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: rows, error } = await supabaseAdmin
       .from("products")
-      .select("id, category_slug, name, description, image_path, sort_order")
+      .select("id, category_slug, name, description, image_path, sort_order, karat")
       .order("category_slug", { ascending: true })
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: true });
