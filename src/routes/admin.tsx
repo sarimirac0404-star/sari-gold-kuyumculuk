@@ -320,7 +320,12 @@ function ProductsManager({
                       )}
                     </div>
                     <div className="p-3">
-                      <div className="font-display text-sm text-foreground truncate">{p.name}</div>
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="font-display text-sm text-foreground truncate">{p.name}</div>
+                        <span className="font-ui text-[9px] px-1.5 py-0.5 border border-primary/50 text-primary uppercase tracking-widest">
+                          {p.karat}
+                        </span>
+                      </div>
                       <div className="font-serif italic text-xs text-muted-foreground line-clamp-2 mt-1">
                         {p.description || "—"}
                       </div>
