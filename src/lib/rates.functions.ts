@@ -29,8 +29,6 @@ interface KurpanoResponse {
 
 // Sadece bu ürünler gösterilecek — kurpano.com/sarigold ile birebir aynı sıra.
 const ALLOWED = [
-  "EUR",
-  "USD",
   "HAS ALTIN",
   "24 AYAR 1 GR",
   "22 AYAR BİLEZİK",
