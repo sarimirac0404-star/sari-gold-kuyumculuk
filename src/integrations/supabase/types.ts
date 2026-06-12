@@ -21,6 +21,7 @@ export type Database = {
           description: string
           id: string
           image_path: string | null
+          karat: string
           name: string
           sort_order: number
           updated_at: string
@@ -31,6 +32,7 @@ export type Database = {
           description?: string
           id?: string
           image_path?: string | null
+          karat?: string
           name: string
           sort_order?: number
           updated_at?: string
@@ -41,6 +43,7 @@ export type Database = {
           description?: string
           id?: string
           image_path?: string | null
+          karat?: string
           name?: string
           sort_order?: number
           updated_at?: string

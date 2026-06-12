@@ -1,0 +1,2 @@
+ALTER TABLE public.products ADD COLUMN IF NOT EXISTS karat text NOT NULL DEFAULT '22K' CHECK (karat IN ('14K','22K'));
+CREATE INDEX IF NOT EXISTS products_category_karat_idx ON public.products(category_slug, karat);
