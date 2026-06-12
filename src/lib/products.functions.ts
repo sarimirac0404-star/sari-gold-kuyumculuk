@@ -149,6 +149,7 @@ export const addProduct = createServerFn({ method: "POST" })
       category_slug: data.category_slug,
       name: data.name,
       description: data.description,
+      karat: data.karat,
       image_path,
     });
     if (error) return { ok: false as const, error: error.message };
