@@ -15,24 +15,16 @@ export function About() {
           </div>
 
           <p className="font-serif text-lg md:text-xl text-foreground/85 leading-relaxed">
-            Eleşkirt'in güvenilir kuyumcusu olarak yıllardır altın ve mücevher
-            sektöründe hizmet vermekteyiz. Her bir tasarımımızda, ustanın
-            sabrını ve altının ihtişamını bir araya getiriyoruz.
+            Eleşkirt'te yeni açılan kuyumcumuzla siz değerli müşterilerimize
+            hizmet vermenin heyecanını yaşıyoruz. Her bir tasarımımızda,
+            ustanın sabrını ve altının ihtişamını bir araya getiriyoruz.
           </p>
 
           <p className="font-serif text-base text-muted-foreground mt-6 italic">
             “Bir mücevher, sahibinin hikayesini taşır. Biz o hikayeye değer katarız.”
           </p>
 
-          <div className="mt-10 grid grid-cols-3 gap-6">
-            <div>
-              <div className="font-display text-3xl text-gradient-gold">20+</div>
-              <div className="font-ui text-[10px] text-muted-foreground mt-1">Yıllık Tecrübe</div>
-            </div>
-            <div>
-              <div className="font-display text-3xl text-gradient-gold">5000+</div>
-              <div className="font-ui text-[10px] text-muted-foreground mt-1">Mutlu Müşteri</div>
-            </div>
+          <div className="mt-10 grid grid-cols-1 gap-6 max-w-[180px]">
             <div>
               <div className="font-display text-3xl text-gradient-gold">%100</div>
               <div className="font-ui text-[10px] text-muted-foreground mt-1">Garanti</div>
