@@ -58,6 +58,7 @@ async function signUrls(
     description: string;
     image_path: string | null;
     sort_order: number;
+    karat?: string | null;
   }>,
 ): Promise<DbProduct[]> {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -70,7 +71,8 @@ async function signUrls(
           .createSignedUrl(r.image_path, SIGNED_URL_TTL);
         image_url = data?.signedUrl ?? null;
       }
-      return { ...r, image_url };
+      const karat: Karat = r.karat === "14K" ? "14K" : "22K";
+      return { ...r, image_url, karat };
     }),
   );
 }
