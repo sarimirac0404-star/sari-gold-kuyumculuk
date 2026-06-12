@@ -199,11 +199,38 @@ function CategoryPage() {
 
       <section className="pb-28">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
-            {products.map((p: Product) => (
-              <ProductCard key={p.id} product={p} onClick={() => setSelected(p)} />
-            ))}
+          <div className="flex justify-center mb-10">
+            <div className="inline-flex border border-border bg-card">
+              {(["22K", "14K"] as const).map((k) => (
+                <button
+                  key={k}
+                  type="button"
+                  onClick={() => setKarat(k)}
+                  className={`px-8 py-3 font-ui text-xs uppercase tracking-widest transition-colors cursor-pointer ${
+                    karat === k
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-primary"
+                  }`}
+                >
+                  {k === "22K" ? "22 Ayar" : "14 Ayar"}
+                </button>
+              ))}
+            </div>
           </div>
+
+          {products.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="font-serif italic text-muted-foreground">
+                Bu ayarda henüz ürün bulunmuyor.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
+              {products.map((p: Product) => (
+                <ProductCard key={p.id} product={p} onClick={() => setSelected(p)} />
+              ))}
+            </div>
+          )}
 
           <div className="mt-16 text-center border-t border-border/40 pt-10">
             <p className="font-serif italic text-muted-foreground mb-6">
