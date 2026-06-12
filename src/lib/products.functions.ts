@@ -200,6 +200,7 @@ export const updateProduct = createServerFn({ method: "POST" })
         name: data.name,
         description: data.description,
         image_path,
+        ...(data.karat ? { karat: data.karat } : {}),
         updated_at: new Date().toISOString(),
       })
       .eq("id", data.id);
