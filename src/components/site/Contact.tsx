@@ -77,8 +77,8 @@ export function Contact() {
               <iframe
                 title="Sarı Gold Kuyumculuk Konum"
                 src={`https://www.google.com/maps?q=${encodeURIComponent(
-                  ADDRESS + ", Turkey"
-                )}&output=embed`}
+                  "Sarı Gold Kuyumculuk, Cumhuriyet Cd., 04600 Eleşkirt/Ağrı, Turkey"
+                )}&z=17&output=embed`}
                 className="absolute inset-0 w-full h-full grayscale contrast-110"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
