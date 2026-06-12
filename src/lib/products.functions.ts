@@ -5,6 +5,8 @@ const ADMIN_PASSWORD = "325641";
 const BUCKET = "product-images";
 const SIGNED_URL_TTL = 60 * 60 * 24 * 365; // 1 year
 
+export type Karat = "14K" | "22K";
+
 export interface DbProduct {
   id: string;
   category_slug: string;
@@ -13,7 +15,10 @@ export interface DbProduct {
   image_path: string | null;
   image_url: string | null;
   sort_order: number;
+  karat: Karat;
 }
+
+const KaratSchema = z.enum(["14K", "22K"]);
 
 const SlugSchema = z.object({ category_slug: z.string().min(1).max(50) });
 
@@ -22,7 +27,8 @@ const AddSchema = z.object({
   category_slug: z.string().min(1).max(50),
   name: z.string().min(1).max(200),
   description: z.string().max(2000).default(""),
-  image_base64: z.string().optional(), // data URL or raw base64
+  karat: KaratSchema.default("22K"),
+  image_base64: z.string().optional(),
   image_filename: z.string().max(200).optional(),
   image_content_type: z.string().max(100).optional(),
 });
@@ -32,6 +38,7 @@ const UpdateSchema = z.object({
   id: z.string().uuid(),
   name: z.string().min(1).max(200),
   description: z.string().max(2000).default(""),
+  karat: KaratSchema.optional(),
   image_base64: z.string().optional(),
   image_filename: z.string().max(200).optional(),
   image_content_type: z.string().max(100).optional(),
@@ -51,6 +58,7 @@ async function signUrls(
     description: string;
     image_path: string | null;
     sort_order: number;
+    karat?: string | null;
   }>,
 ): Promise<DbProduct[]> {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -63,7 +71,8 @@ async function signUrls(
           .createSignedUrl(r.image_path, SIGNED_URL_TTL);
         image_url = data?.signedUrl ?? null;
       }
-      return { ...r, image_url };
+      const karat: Karat = r.karat === "14K" ? "14K" : "22K";
+      return { ...r, image_url, karat };
     }),
   );
 }
@@ -90,7 +99,7 @@ export const listProducts = createServerFn({ method: "POST" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: rows, error } = await supabaseAdmin
       .from("products")
-      .select("id, category_slug, name, description, image_path, sort_order")
+      .select("id, category_slug, name, description, image_path, sort_order, karat")
       .eq("category_slug", data.category_slug)
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: true });
@@ -105,7 +114,7 @@ export const adminListAllProducts = createServerFn({ method: "POST" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: rows, error } = await supabaseAdmin
       .from("products")
-      .select("id, category_slug, name, description, image_path, sort_order")
+      .select("id, category_slug, name, description, image_path, sort_order, karat")
       .order("category_slug", { ascending: true })
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: true });
@@ -140,6 +149,7 @@ export const addProduct = createServerFn({ method: "POST" })
       category_slug: data.category_slug,
       name: data.name,
       description: data.description,
+      karat: data.karat,
       image_path,
     });
     if (error) return { ok: false as const, error: error.message };
@@ -190,6 +200,7 @@ export const updateProduct = createServerFn({ method: "POST" })
         name: data.name,
         description: data.description,
         image_path,
+        ...(data.karat ? { karat: data.karat } : {}),
         updated_at: new Date().toISOString(),
       })
       .eq("id", data.id);

@@ -320,7 +320,12 @@ function ProductsManager({
                       )}
                     </div>
                     <div className="p-3">
-                      <div className="font-display text-sm text-foreground truncate">{p.name}</div>
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="font-display text-sm text-foreground truncate">{p.name}</div>
+                        <span className="font-ui text-[9px] px-1.5 py-0.5 border border-primary/50 text-primary uppercase tracking-widest">
+                          {p.karat}
+                        </span>
+                      </div>
                       <div className="font-serif italic text-xs text-muted-foreground line-clamp-2 mt-1">
                         {p.description || "—"}
                       </div>
@@ -406,6 +411,7 @@ function ProductDialog({
   const [categorySlug, setCategorySlug] = useState(
     initial?.category_slug ?? CATEGORIES[0].slug,
   );
+  const [karat, setKarat] = useState<"14K" | "22K">(initial?.karat ?? "22K");
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(initial?.image_url ?? null);
   const [removeImage, setRemoveImage] = useState(false);
@@ -438,6 +444,7 @@ function ProductDialog({
             category_slug: categorySlug,
             name,
             description,
+            karat,
             image_base64,
             image_filename: file?.name,
             image_content_type: file?.type,
@@ -455,6 +462,7 @@ function ProductDialog({
             id: initial.id,
             name,
             description,
+            karat,
             image_base64,
             image_filename: file?.name,
             image_content_type: file?.type,
@@ -500,6 +508,18 @@ function ProductDialog({
               </Select>
             </div>
           )}
+          <div className="space-y-2">
+            <Label>Ayar</Label>
+            <Select value={karat} onValueChange={(v) => setKarat(v as "14K" | "22K")}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="22K">22 Ayar (22K)</SelectItem>
+                <SelectItem value="14K">14 Ayar (14K)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
           <div className="space-y-2">
             <Label>Ürün Adı</Label>
             <Input value={name} onChange={(e) => setName(e.target.value)} required maxLength={200} />
