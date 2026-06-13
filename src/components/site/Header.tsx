@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { Menu, X, MessageCircle } from "lucide-react";
+import { Link, useLocation } from "@tanstack/react-router";
 
 const NAV = [
-  { href: "#anasayfa", label: "Anasayfa" },
-  { href: "#urunler", label: "Ürünler" },
-  { href: "#hakkimizda", label: "Hakkımızda" },
-  { href: "#iletisim", label: "İletişim" },
+  { hash: "anasayfa", label: "Anasayfa" },
+  { hash: "urunler", label: "Ürünler" },
+  { hash: "hakkimizda", label: "Hakkımızda" },
+  { hash: "iletisim", label: "İletişim" },
 ];
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -18,6 +21,28 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const renderNavItem = (n: { hash: string; label: string }, onClick?: () => void) => {
+    const className = "font-ui text-xs text-foreground/80 hover:text-primary transition-colors";
+    if (isHome) {
+      return (
+        <a key={n.hash} href={`#${n.hash}`} onClick={onClick} className={className}>
+          {n.label}
+        </a>
+      );
+    }
+    return (
+      <Link
+        key={n.hash}
+        to="/"
+        hash={n.hash}
+        onClick={onClick}
+        className={className}
+      >
+        {n.label}
+      </Link>
+    );
+  };
 
   return (
     <header
@@ -28,25 +53,17 @@ export function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
-        <a href="#anasayfa" className="flex flex-col leading-tight">
+        <Link to="/" className="flex flex-col leading-tight">
           <span className="font-display text-xl md:text-2xl text-gradient-gold tracking-wider">
             SARI GOLD
           </span>
           <span className="font-ui text-[10px] text-muted-foreground -mt-0.5">
             Kuyumculuk
           </span>
-        </a>
+        </Link>
 
         <nav className="hidden md:flex items-center gap-10">
-          {NAV.map((n) => (
-            <a
-              key={n.href}
-              href={n.href}
-              className="font-ui text-xs text-foreground/80 hover:text-primary transition-colors"
-            >
-              {n.label}
-            </a>
-          ))}
+          {NAV.map((n) => renderNavItem(n))}
         </nav>
 
         <div className="flex items-center gap-3">
@@ -72,16 +89,7 @@ export function Header() {
       {open && (
         <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md">
           <nav className="flex flex-col p-6 gap-4">
-            {NAV.map((n) => (
-              <a
-                key={n.href}
-                href={n.href}
-                onClick={() => setOpen(false)}
-                className="font-ui text-sm text-foreground/80 hover:text-primary"
-              >
-                {n.label}
-              </a>
-            ))}
+            {NAV.map((n) => renderNavItem(n, () => setOpen(false)))}
           </nav>
         </div>
       )}
