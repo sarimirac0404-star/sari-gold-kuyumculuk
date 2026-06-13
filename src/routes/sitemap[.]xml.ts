@@ -17,10 +17,11 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/", changefreq: "daily", priority: "1.0" },
           { path: "/kategori/yuzukler", changefreq: "weekly", priority: "0.8" },
           { path: "/kategori/kolyeler", changefreq: "weekly", priority: "0.8" },
-          { path: "/kategori/kupeler", changefreq: "weekly", priority: "0.8" },
           { path: "/kategori/bilezikler", changefreq: "weekly", priority: "0.8" },
-          { path: "/kategori/setler", changefreq: "weekly", priority: "0.8" },
           { path: "/kategori/bileklikler", changefreq: "weekly", priority: "0.8" },
+          { path: "/kategori/kupeler", changefreq: "weekly", priority: "0.8" },
+          { path: "/kategori/kelepceler", changefreq: "weekly", priority: "0.8" },
+          { path: "/kategori/gerdanliklar", changefreq: "weekly", priority: "0.8" },
         ];
 
         const urls = entries.map((e) =>
