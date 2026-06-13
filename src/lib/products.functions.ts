@@ -1,9 +1,25 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-const ADMIN_PASSWORD = "325641";
 const BUCKET = "product-images";
 const SIGNED_URL_TTL = 60 * 60 * 24 * 365; // 1 year
+
+// 10 MB image cap. Base64 expands by ~1.37×, so 13_700_000 chars ≈ 10 MB binary.
+const MAX_IMAGE_BASE64_LENGTH = 13_700_000;
+const ALLOWED_MIME_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+]);
+const ALLOWED_EXTENSIONS = new Set(["jpg", "jpeg", "png", "webp", "gif"]);
+const EXT_TO_MIME: Record<string, string> = {
+  jpg: "image/jpeg",
+  jpeg: "image/jpeg",
+  png: "image/png",
+  webp: "image/webp",
+  gif: "image/gif",
+};
 
 export type Karat = "14K" | "22K";
 
@@ -28,7 +44,7 @@ const AddSchema = z.object({
   name: z.string().min(1).max(200),
   description: z.string().max(2000).default(""),
   karat: KaratSchema.default("22K"),
-  image_base64: z.string().optional(),
+  image_base64: z.string().max(MAX_IMAGE_BASE64_LENGTH).optional(),
   image_filename: z.string().max(200).optional(),
   image_content_type: z.string().max(100).optional(),
 });
@@ -39,7 +55,7 @@ const UpdateSchema = z.object({
   name: z.string().min(1).max(200),
   description: z.string().max(2000).default(""),
   karat: KaratSchema.optional(),
-  image_base64: z.string().optional(),
+  image_base64: z.string().max(MAX_IMAGE_BASE64_LENGTH).optional(),
   image_filename: z.string().max(200).optional(),
   image_content_type: z.string().max(100).optional(),
   remove_image: z.boolean().optional(),
@@ -85,12 +101,40 @@ function decodeBase64(input: string): Buffer {
 function extFromName(name?: string, contentType?: string): string {
   if (name && name.includes(".")) {
     const ext = name.split(".").pop()!.toLowerCase();
-    if (ext.length <= 5) return ext;
+    if (ALLOWED_EXTENSIONS.has(ext)) return ext;
   }
   if (contentType?.startsWith("image/")) {
-    return contentType.split("/")[1].split("+")[0];
+    const ct = contentType.split("/")[1].split("+")[0].toLowerCase();
+    if (ALLOWED_EXTENSIONS.has(ct)) return ct;
   }
   return "jpg";
+}
+
+/**
+ * Validates the uploaded image type. Rejects SVG and any non-image content
+ * to prevent stored XSS via signed URLs.
+ */
+function validateImageType(
+  contentType: string | undefined,
+  filename: string | undefined,
+): { ok: true; mime: string; ext: string } | { ok: false; error: string } {
+  const ext = filename && filename.includes(".")
+    ? filename.split(".").pop()!.toLowerCase()
+    : "";
+  if (contentType) {
+    const ct = contentType.toLowerCase();
+    if (!ALLOWED_MIME_TYPES.has(ct)) {
+      return { ok: false, error: "Desteklenmeyen dosya türü. Sadece JPG, PNG, WEBP, GIF kabul edilir." };
+    }
+  }
+  if (ext && !ALLOWED_EXTENSIONS.has(ext)) {
+    return { ok: false, error: "Desteklenmeyen dosya uzantısı. Sadece JPG, PNG, WEBP, GIF kabul edilir." };
+  }
+  const resolvedExt = extFromName(filename, contentType);
+  const resolvedMime = contentType && ALLOWED_MIME_TYPES.has(contentType.toLowerCase())
+    ? contentType.toLowerCase()
+    : EXT_TO_MIME[resolvedExt];
+  return { ok: true, mime: resolvedMime, ext: resolvedExt };
 }
 
 export const listProducts = createServerFn({ method: "POST" })
@@ -110,7 +154,8 @@ export const listProducts = createServerFn({ method: "POST" })
 export const adminListAllProducts = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => z.object({ password: z.string() }).parse(d))
   .handler(async ({ data }): Promise<{ ok: boolean; products: DbProduct[] }> => {
-    if (data.password !== ADMIN_PASSWORD) return { ok: false, products: [] };
+    const { isValidAdminPassword } = await import("@/lib/auth.server");
+    if (!isValidAdminPassword(data.password)) return { ok: false, products: [] };
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: rows, error } = await supabaseAdmin
       .from("products")
@@ -125,20 +170,22 @@ export const adminListAllProducts = createServerFn({ method: "POST" })
 export const addProduct = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => AddSchema.parse(d))
   .handler(async ({ data }) => {
-    if (data.password !== ADMIN_PASSWORD) {
+    const { isValidAdminPassword } = await import("@/lib/auth.server");
+    if (!isValidAdminPassword(data.password)) {
       return { ok: false as const, error: "Şifre hatalı" };
     }
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
     let image_path: string | null = null;
     if (data.image_base64) {
-      const ext = extFromName(data.image_filename, data.image_content_type);
-      const path = `${data.category_slug}/${crypto.randomUUID()}.${ext}`;
+      const typeCheck = validateImageType(data.image_content_type, data.image_filename);
+      if (!typeCheck.ok) return { ok: false as const, error: typeCheck.error };
+      const path = `${data.category_slug}/${crypto.randomUUID()}.${typeCheck.ext}`;
       const bytes = decodeBase64(data.image_base64);
       const { error: upErr } = await supabaseAdmin.storage
         .from(BUCKET)
         .upload(path, bytes, {
-          contentType: data.image_content_type || `image/${ext}`,
+          contentType: typeCheck.mime,
           upsert: false,
         });
       if (upErr) return { ok: false as const, error: upErr.message };
@@ -159,7 +206,8 @@ export const addProduct = createServerFn({ method: "POST" })
 export const updateProduct = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => UpdateSchema.parse(d))
   .handler(async ({ data }) => {
-    if (data.password !== ADMIN_PASSWORD) {
+    const { isValidAdminPassword } = await import("@/lib/auth.server");
+    if (!isValidAdminPassword(data.password)) {
       return { ok: false as const, error: "Şifre hatalı" };
     }
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -178,16 +226,17 @@ export const updateProduct = createServerFn({ method: "POST" })
       image_path = null;
     }
     if (data.image_base64) {
+      const typeCheck = validateImageType(data.image_content_type, data.image_filename);
+      if (!typeCheck.ok) return { ok: false as const, error: typeCheck.error };
       if (existing.image_path) {
         await supabaseAdmin.storage.from(BUCKET).remove([existing.image_path]);
       }
-      const ext = extFromName(data.image_filename, data.image_content_type);
-      const path = `${existing.category_slug}/${crypto.randomUUID()}.${ext}`;
+      const path = `${existing.category_slug}/${crypto.randomUUID()}.${typeCheck.ext}`;
       const bytes = decodeBase64(data.image_base64);
       const { error: upErr } = await supabaseAdmin.storage
         .from(BUCKET)
         .upload(path, bytes, {
-          contentType: data.image_content_type || `image/${ext}`,
+          contentType: typeCheck.mime,
           upsert: false,
         });
       if (upErr) return { ok: false as const, error: upErr.message };
@@ -211,7 +260,8 @@ export const updateProduct = createServerFn({ method: "POST" })
 export const deleteProduct = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => DeleteSchema.parse(d))
   .handler(async ({ data }) => {
-    if (data.password !== ADMIN_PASSWORD) {
+    const { isValidAdminPassword } = await import("@/lib/auth.server");
+    if (!isValidAdminPassword(data.password)) {
       return { ok: false as const, error: "Şifre hatalı" };
     }
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
