@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://sari-gold-kuyumculuk.lovable.app/sitemap.xml
