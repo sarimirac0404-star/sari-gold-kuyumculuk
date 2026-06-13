@@ -13,17 +13,21 @@ import { useReveal } from "@/hooks/use-reveal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı" },
+      { title: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı Kuyumcu | Altın, Bilezik, Yüzük" },
       {
         name: "description",
         content:
-          "Eleşkirt'in güvenilir kuyumcusu Sarı Gold Kuyumculuk. Altın, gümüş, mücevher ve anlık altın & döviz fiyatları.",
+          "Sarı Gold Kuyumculuk — Eleşkirt'in güvenilir kuyumcusu. 22 ayar & 14 ayar altın, bilezik, yüzük, kolye, küpe ve anlık altın & döviz fiyatları. Cumhuriyet Cd., Eleşkirt / Ağrı.",
       },
-      { property: "og:title", content: "Sarı Gold Kuyumculuk" },
+      { property: "og:title", content: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı" },
+      { property: "og:url", content: "https://sari-gold-kuyumculuk.lovable.app/" },
       {
         property: "og:description",
-        content: "Altının İhtişamı, Güvenin Adresi — Eleşkirt / Ağrı",
+        content: "Altının İhtişamı, Güvenin Adresi — Eleşkirt / Ağrı. 22 & 14 ayar altın, bilezik, yüzük, kolye, küpe.",
       },
+    ],
+    links: [
+      { rel: "canonical", href: "https://sari-gold-kuyumculuk.lovable.app/" },
     ],
   }),
   component: Index,
