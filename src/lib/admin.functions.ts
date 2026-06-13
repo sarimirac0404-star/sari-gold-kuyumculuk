@@ -1,9 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-// Admin şifresi — sadece sunucuda kontrol edilir, tarayıcıya gönderilmez.
-const ADMIN_PASSWORD = "325641";
-
 const OffsetSchema = z.object({
   item_name: z.string().min(1).max(100),
   buying_offset: z.number().finite(),
@@ -24,13 +21,15 @@ export type OffsetRow = z.infer<typeof OffsetSchema>;
 export const verifyAdminPassword = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => PasswordInputSchema.parse(d))
   .handler(async ({ data }) => {
-    return { ok: data.password === ADMIN_PASSWORD };
+    const { isValidAdminPassword } = await import("@/lib/auth.server");
+    return { ok: isValidAdminPassword(data.password) };
   });
 
 export const getAdminOffsets = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => PasswordInputSchema.parse(d))
   .handler(async ({ data }): Promise<{ ok: boolean; offsets: OffsetRow[] }> => {
-    if (data.password !== ADMIN_PASSWORD) {
+    const { isValidAdminPassword } = await import("@/lib/auth.server");
+    if (!isValidAdminPassword(data.password)) {
       return { ok: false, offsets: [] };
     }
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -51,7 +50,8 @@ export const getAdminOffsets = createServerFn({ method: "POST" })
 export const saveAdminOffsets = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => SaveInputSchema.parse(d))
   .handler(async ({ data }) => {
-    if (data.password !== ADMIN_PASSWORD) {
+    const { isValidAdminPassword } = await import("@/lib/auth.server");
+    if (!isValidAdminPassword(data.password)) {
       return { ok: false as const, error: "Şifre hatalı" };
     }
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
