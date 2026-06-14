@@ -88,8 +88,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "Sarı Gold Kuyumculuk" },
       { property: "og:description", content: "Altının İhtişamı, Güvenin Adresi — Eleşkirt / Ağrı" },
       { name: "twitter:description", content: "Altının İhtişamı, Güvenin Adresi — Eleşkirt / Ağrı" },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b0d740e2-3a33-46c9-81e0-2d71799011d0/id-preview-ee14cce7--d4f11574-6f24-4339-8a90-d16f8e48bab3.lovable.app-1781367342303.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b0d740e2-3a33-46c9-81e0-2d71799011d0/id-preview-ee14cce7--d4f11574-6f24-4339-8a90-d16f8e48bab3.lovable.app-1781367342303.png" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/voeu8TtRyQVMF66hVdwt71AeNLO2/social-images/social-1781408853547-1000001205.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/voeu8TtRyQVMF66hVdwt71AeNLO2/social-images/social-1781408853547-1000001205.webp" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
