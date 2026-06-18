@@ -88,8 +88,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "Sarı Gold Kuyumculuk" },
       { property: "og:description", content: "Altının İhtişamı, Güvenin Adresi — Eleşkirt / Ağrı" },
       { name: "twitter:description", content: "Altının İhtişamı, Güvenin Adresi — Eleşkirt / Ağrı" },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/voeu8TtRyQVMF66hVdwt71AeNLO2/social-images/social-1781409329745-1000001207.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/voeu8TtRyQVMF66hVdwt71AeNLO2/social-images/social-1781409329745-1000001207.webp" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/voeu8TtRyQVMF66hVdwt71AeNLO2/social-images/social-1781793689305-WhatsApp_Image_2025-12-02_at_12.33.05.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/voeu8TtRyQVMF66hVdwt71AeNLO2/social-images/social-1781793689305-WhatsApp_Image_2025-12-02_at_12.33.05.webp" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
