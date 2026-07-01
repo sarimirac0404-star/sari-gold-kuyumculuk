@@ -1,18 +1,19 @@
 // Server-only admin password helper.
-// Accepts any of the configured admin passwords. Reads from env vars when set,
-// otherwise falls back to the built-in list.
-const FALLBACK_PASSWORDS = ["325641", "533814", "7112481"];
+// Admin login requires ALL THREE passwords entered correctly.
+// The client sends them combined as "p1|p2|p3".
+const FALLBACK = ["325641", "533814", "7112481"] as const;
 
-export function getAdminPasswords(): string[] {
-  const fromEnv = [
-    process.env.ADMIN_PASSWORD,
-    process.env.ADMIN_PASSWORD_2,
-    process.env.ADMIN_PASSWORD_3,
-  ].filter((v): v is string => typeof v === "string" && v.length > 0);
-  return fromEnv.length > 0 ? fromEnv : FALLBACK_PASSWORDS;
+export function getAdminPasswords(): [string, string, string] {
+  const a = process.env.ADMIN_PASSWORD_1 || FALLBACK[0];
+  const b = process.env.ADMIN_PASSWORD_2 || FALLBACK[1];
+  const c = process.env.ADMIN_PASSWORD_3 || FALLBACK[2];
+  return [a, b, c];
 }
 
 export function isValidAdminPassword(input: string): boolean {
   if (typeof input !== "string" || input.length === 0) return false;
-  return getAdminPasswords().includes(input);
+  const parts = input.split("|");
+  if (parts.length !== 3) return false;
+  const expected = getAdminPasswords();
+  return parts[0] === expected[0] && parts[1] === expected[1] && parts[2] === expected[2];
 }
