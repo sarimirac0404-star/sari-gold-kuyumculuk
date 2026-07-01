@@ -163,13 +163,23 @@ function AdminPage() {
             <h1 className="font-display text-xl">Yönetim Girişi</h1>
           </div>
           <div className="space-y-2">
+            <Label htmlFor="user">Kullanıcı adı</Label>
+            <Input
+              id="user"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              autoFocus
+              required
+            />
+          </div>
+          <div className="space-y-2">
             <Label htmlFor="pw">Şifre</Label>
             <Input
               id="pw"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              autoFocus
               required
             />
           </div>
