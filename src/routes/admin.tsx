@@ -79,7 +79,10 @@ function AdminPage() {
   const fetchProducts = useServerFn(adminListAllProducts);
 
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [pw1, setPw1] = useState("");
+  const [pw2, setPw2] = useState("");
+  const [pw3, setPw3] = useState("");
+  const password = `${pw1}|${pw2}|${pw3}`;
   const [authed, setAuthed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
