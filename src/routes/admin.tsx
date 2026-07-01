@@ -78,6 +78,7 @@ function AdminPage() {
   const saveOffsets = useServerFn(saveAdminOffsets);
   const fetchProducts = useServerFn(adminListAllProducts);
 
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [authed, setAuthed] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -93,6 +94,11 @@ function AdminPage() {
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
+    const normalizedUser = username.trim().toLocaleLowerCase("tr");
+    if (normalizedUser !== "sarı gold kuyumculuk" && normalizedUser !== "sari gold kuyumculuk") {
+      toast.error("Kullanıcı adı hatalı");
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetchOffsets({ data: { password } });
@@ -157,13 +163,23 @@ function AdminPage() {
             <h1 className="font-display text-xl">Yönetim Girişi</h1>
           </div>
           <div className="space-y-2">
+            <Label htmlFor="user">Kullanıcı adı</Label>
+            <Input
+              id="user"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              autoFocus
+              required
+            />
+          </div>
+          <div className="space-y-2">
             <Label htmlFor="pw">Şifre</Label>
             <Input
               id="pw"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              autoFocus
               required
             />
           </div>

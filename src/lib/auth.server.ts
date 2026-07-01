@@ -1,13 +1,18 @@
 // Server-only admin password helper.
-// Reads ADMIN_PASSWORD from the server environment. Falls back to the
-// legacy hardcoded PIN only when the secret is not yet configured, so the
-// app keeps working during the rotation window.
-const FALLBACK = "325641";
+// Accepts any of the configured admin passwords. Reads from env vars when set,
+// otherwise falls back to the built-in list.
+const FALLBACK_PASSWORDS = ["325641", "533814", "7112481"];
 
-export function getAdminPassword(): string {
-  return process.env.ADMIN_PASSWORD || FALLBACK;
+export function getAdminPasswords(): string[] {
+  const fromEnv = [
+    process.env.ADMIN_PASSWORD,
+    process.env.ADMIN_PASSWORD_2,
+    process.env.ADMIN_PASSWORD_3,
+  ].filter((v): v is string => typeof v === "string" && v.length > 0);
+  return fromEnv.length > 0 ? fromEnv : FALLBACK_PASSWORDS;
 }
 
 export function isValidAdminPassword(input: string): boolean {
-  return typeof input === "string" && input.length > 0 && input === getAdminPassword();
+  if (typeof input !== "string" || input.length === 0) return false;
+  return getAdminPasswords().includes(input);
 }
