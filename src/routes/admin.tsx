@@ -94,6 +94,11 @@ function AdminPage() {
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
+    const normalizedUser = username.trim().toLocaleLowerCase("tr");
+    if (normalizedUser !== "sarı gold kuyumculuk" && normalizedUser !== "sari gold kuyumculuk") {
+      toast.error("Kullanıcı adı hatalı");
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetchOffsets({ data: { password } });
