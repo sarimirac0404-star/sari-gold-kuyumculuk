@@ -177,14 +177,16 @@ function AdminPage() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="pw">Şifre</Label>
-            <Input
-              id="pw"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <Label htmlFor="pw1">Şifre 1</Label>
+            <Input id="pw1" type="password" value={pw1} onChange={(e) => setPw1(e.target.value)} required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="pw2">Şifre 2</Label>
+            <Input id="pw2" type="password" value={pw2} onChange={(e) => setPw2(e.target.value)} required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="pw3">Şifre 3</Label>
+            <Input id="pw3" type="password" value={pw3} onChange={(e) => setPw3(e.target.value)} required />
           </div>
           <Button type="submit" disabled={loading} className="w-full">
             {loading ? <Loader2 className="animate-spin" size={16} /> : "Giriş"}
