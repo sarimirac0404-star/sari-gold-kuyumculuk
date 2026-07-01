@@ -79,7 +79,10 @@ function AdminPage() {
   const fetchProducts = useServerFn(adminListAllProducts);
 
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [pw1, setPw1] = useState("");
+  const [pw2, setPw2] = useState("");
+  const [pw3, setPw3] = useState("");
+  const password = `${pw1}|${pw2}|${pw3}`;
   const [authed, setAuthed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -174,14 +177,16 @@ function AdminPage() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="pw">Şifre</Label>
-            <Input
-              id="pw"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <Label htmlFor="pw1">Şifre 1</Label>
+            <Input id="pw1" type="password" value={pw1} onChange={(e) => setPw1(e.target.value)} required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="pw2">Şifre 2</Label>
+            <Input id="pw2" type="password" value={pw2} onChange={(e) => setPw2(e.target.value)} required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="pw3">Şifre 3</Label>
+            <Input id="pw3" type="password" value={pw3} onChange={(e) => setPw3(e.target.value)} required />
           </div>
           <Button type="submit" disabled={loading} className="w-full">
             {loading ? <Loader2 className="animate-spin" size={16} /> : "Giriş"}
