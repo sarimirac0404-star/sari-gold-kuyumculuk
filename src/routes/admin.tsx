@@ -78,6 +78,7 @@ function AdminPage() {
   const saveOffsets = useServerFn(saveAdminOffsets);
   const fetchProducts = useServerFn(adminListAllProducts);
 
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [authed, setAuthed] = useState(false);
   const [loading, setLoading] = useState(false);
