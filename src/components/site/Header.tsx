@@ -4,6 +4,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 
 const NAV = [
   { hash: "anasayfa", label: "Anasayfa" },
+  { hash: "canli-kur", label: "Canlı Kur" },
   { hash: "urunler", label: "Ürünler" },
   { hash: "hakkimizda", label: "Hakkımızda" },
   { hash: "iletisim", label: "İletişim" },

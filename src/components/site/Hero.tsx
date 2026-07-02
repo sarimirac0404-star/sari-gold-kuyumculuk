@@ -30,7 +30,7 @@ export function Hero() {
         {/* Top ornament */}
         <div className="flex items-center justify-center gap-4 mb-8">
           <span className="h-px w-16 bg-gradient-to-r from-transparent to-primary" />
-          <span className="font-ui text-[10px] text-primary">Est. Eleşkirt</span>
+          <span className="font-ui text-[10px] text-primary">Eleşkirt</span>
           <span className="h-px w-16 bg-gradient-to-l from-transparent to-primary" />
         </div>
 

@@ -1,7 +1,7 @@
-import { Award, BadgeDollarSign, Handshake } from "lucide-react";
+import { Sparkles, BadgeDollarSign, Handshake } from "lucide-react";
 
 const ITEMS = [
-  { Icon: Award, title: "Garantili Ürünler", desc: "Sertifikalı altın ve mücevher.", href: "#urunler" },
+  { Icon: Sparkles, title: "Şık ve Zarif Tasarımlar", desc: "Zamansız zarafet, özenli el işçiliği.", href: "#urunler" },
   { Icon: BadgeDollarSign, title: "En İyi Fiyat", desc: "Piyasanın en rekabetçi değerleri.", href: "#canli-kur" },
   { Icon: Handshake, title: "Güvenilir Hizmet", desc: "Yılların verdiği itibar ve güven.", href: "#hakkimizda" },
 ];
