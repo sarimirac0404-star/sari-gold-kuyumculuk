@@ -6,6 +6,7 @@ import { ArrowLeft, ImageIcon } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
+import { CategoryIcon } from "@/components/site/CategoryIcon";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { getCategory, CATEGORIES, type Product } from "@/lib/products";
 import { listProducts } from "@/lib/products.functions";
@@ -184,7 +185,7 @@ function CategoryPage() {
           </Link>
 
           <div className="text-center max-w-2xl mx-auto">
-            <div className="text-6xl mb-6">{category.icon}</div>
+            <div className="mb-6 flex justify-center text-primary"><CategoryIcon slug={category.slug} className="w-20 h-20" /></div>
             <div className="font-ui text-[10px] text-primary mb-3">Koleksiyon</div>
             <h1 className="font-display text-4xl md:text-5xl text-gradient-gold">
               {category.name}
@@ -242,9 +243,10 @@ function CategoryPage() {
                   key={c.slug}
                   to="/kategori/$slug"
                   params={{ slug: c.slug }}
-                  className="px-5 py-2 border border-border hover:border-primary text-foreground/80 hover:text-primary font-ui text-xs transition-colors"
+                  className="inline-flex items-center gap-2 px-5 py-2 border border-border hover:border-primary text-foreground/80 hover:text-primary font-ui text-xs transition-colors"
                 >
-                  {c.icon} {c.name}
+                  <span className="text-primary"><CategoryIcon slug={c.slug} className="w-4 h-4" /></span>
+                  {c.name}
                 </Link>
               ))}
             </div>
