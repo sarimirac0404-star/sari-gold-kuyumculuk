@@ -64,6 +64,7 @@ function ProductCard({ product, onClick }: { product: Product; onClick: () => vo
             alt={product.name}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
+            decoding="async"
           />
         ) : (
           <div className="flex flex-col items-center gap-3 text-primary/40">
