@@ -129,7 +129,7 @@ function Pendant({ className }: { className?: string }) {
   );
 }
 
-const map: Record<string, (p: { className?: string }) => JSX.Element> = {
+const map: Record<string, (p: { className?: string }) => React.ReactElement> = {
   yuzukler: Ring,
   kolyeler: Necklace,
   bilezikler: Bracelet,
