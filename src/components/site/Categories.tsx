@@ -1,26 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { CATEGORIES } from "@/lib/products";
-
-function BraceletIcon() {
-  return (
-    <svg
-      viewBox="0 0 64 64"
-      className="w-14 h-14 md:w-16 md:h-16"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      aria-hidden="true"
-    >
-      <ellipse cx="32" cy="34" rx="22" ry="10" />
-      <ellipse cx="32" cy="30" rx="22" ry="10" fill="hsl(var(--background))" />
-      <circle cx="32" cy="20" r="3.5" fill="currentColor" />
-      <circle cx="20" cy="22" r="2" fill="currentColor" />
-      <circle cx="44" cy="22" r="2" fill="currentColor" />
-      <circle cx="12" cy="27" r="1.5" fill="currentColor" />
-      <circle cx="52" cy="27" r="1.5" fill="currentColor" />
-    </svg>
-  );
-}
+import { CategoryIcon } from "./CategoryIcon";
 
 
 export function Categories() {
@@ -55,8 +35,8 @@ export function Categories() {
               <span className="absolute bottom-3 right-3 text-primary/60 group-hover:text-primary transition-colors">◆</span>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                <div className="text-5xl md:text-6xl mb-6 transition-transform duration-500 group-hover:scale-110 flex items-center justify-center">
-                  {c.slug === "bilezikler" ? <BraceletIcon /> : c.icon}
+                <div className="mb-6 text-primary transition-transform duration-500 group-hover:scale-110 flex items-center justify-center">
+                  <CategoryIcon slug={c.slug} />
                 </div>
 
                 <h3 className="font-display text-xl md:text-2xl text-gold-pale group-hover:text-primary transition-colors">

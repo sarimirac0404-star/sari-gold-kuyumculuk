@@ -31,7 +31,7 @@ const placeholders = (prefix: string, count: number): Product[] =>
 export const CATEGORIES: Category[] = [
   {
     slug: "yuzukler",
-    icon: "💍",
+    icon: "",
     name: "Yüzükler",
     desc: "Nişan & Pırlanta",
     intro:
@@ -54,7 +54,7 @@ export const CATEGORIES: Category[] = [
   },
   {
     slug: "kolyeler",
-    icon: "📿",
+    icon: "",
     name: "Kolyeler",
     desc: "Zarif Tasarımlar",
     intro: "Her zevke uygun zarif altın kolye koleksiyonu.",
@@ -62,7 +62,7 @@ export const CATEGORIES: Category[] = [
   },
   {
     slug: "bilezikler",
-    icon: "⌚",
+    icon: "",
     name: "Bilezikler",
     desc: "El İşçiliği",
     intro: "Geleneksel ve modern bilezik modelleri.",
@@ -70,7 +70,7 @@ export const CATEGORIES: Category[] = [
   },
   {
     slug: "bileklikler",
-    icon: "🔗",
+    icon: "",
     name: "Bileklikler",
     desc: "Şık Detaylar",
     intro: "Günlük ve özel kullanım için bileklik modelleri.",
@@ -78,7 +78,7 @@ export const CATEGORIES: Category[] = [
   },
   {
     slug: "kupeler",
-    icon: "👂",
+    icon: "",
     name: "Küpeler",
     desc: "Zarif Dokunuş",
     intro: "Sallantılı, tektaş ve klasik küpe koleksiyonu.",
@@ -86,7 +86,7 @@ export const CATEGORIES: Category[] = [
   },
   {
     slug: "kelepceler",
-    icon: "⚜️",
+    icon: "",
     name: "Kelepçeler",
     desc: "Güçlü Duruş",
     intro: "İddialı tasarımlarıyla kelepçe modelleri.",
@@ -94,11 +94,27 @@ export const CATEGORIES: Category[] = [
   },
   {
     slug: "gerdanliklar",
-    icon: "💎",
+    icon: "",
     name: "Gerdanlıklar",
     desc: "Görkemli Tasarım",
     intro: "Özel günler için göz alıcı gerdanlık koleksiyonu.",
     products: placeholders("Gerdanlık", 6),
+  },
+  {
+    slug: "setler",
+    icon: "",
+    name: "Setler",
+    desc: "Uyumlu Takımlar",
+    intro: "Kolye, küpe ve yüzükten oluşan uyumlu altın set koleksiyonu.",
+    products: placeholders("Set", 6),
+  },
+  {
+    slug: "kolye-uclari",
+    icon: "",
+    name: "Kolye Uçları",
+    desc: "İnce Detaylar",
+    intro: "Zarif ve anlamlı kolye ucu tasarımları.",
+    products: placeholders("Kolye Ucu", 6),
   },
 ];
 
