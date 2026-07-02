@@ -1,3 +1,4 @@
+import type * as React from "react";
 // Realistic SVG icons for jewelry categories.
 // Kept in a single file so every place (home grid, category page header,
 // related-links chip) renders the exact same visual.
