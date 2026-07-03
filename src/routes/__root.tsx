@@ -107,10 +107,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "apple-touch-icon", href: "/favicon.png" },
     ],
   }),
-  // keywords include case/spacing variations so search engines match all forms
-  // sarigold, sarı gold, SARI GOLD, Sari Gold Kuyumculuk
-    ],
-  }),
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
