@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Menu, X, MessageCircle } from "lucide-react";
 import { Link, useLocation } from "@tanstack/react-router";
+import logoAsset from "@/assets/sari-gold-logo.jpeg.asset.json";
 
 const NAV = [
   { hash: "anasayfa", label: "Anasayfa" },
@@ -54,12 +55,22 @@ export function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
-        <Link to="/" className="flex flex-col leading-tight">
-          <span className="font-display text-xl md:text-2xl text-gradient-gold tracking-wider">
-            SARI GOLD
-          </span>
-          <span className="font-ui text-[10px] text-muted-foreground -mt-0.5">
-            Kuyumculuk
+        <Link to="/" className="flex items-center gap-3 leading-tight" aria-label="Sarı Gold Kuyumculuk ana sayfa">
+          <img
+            src={logoAsset.url}
+            alt="Sarı Gold Kuyumculuk logo"
+            className="h-12 w-12 rounded-full border border-primary/35 object-cover shadow-gold"
+            width={48}
+            height={48}
+            decoding="async"
+          />
+          <span className="flex flex-col">
+            <span className="font-display text-xl md:text-2xl text-gradient-gold tracking-wider">
+              SARI GOLD
+            </span>
+            <span className="font-ui text-[10px] text-muted-foreground -mt-0.5">
+              Kuyumculuk
+            </span>
           </span>
         </Link>
 

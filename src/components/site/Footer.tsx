@@ -1,15 +1,27 @@
 import { Instagram, MessageCircle } from "lucide-react";
+import logoAsset from "@/assets/sari-gold-logo.jpeg.asset.json";
 
 export function Footer() {
   return (
     <footer className="bg-background border-t border-border py-12">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="text-center md:text-left">
-          <div className="font-display text-2xl text-gradient-gold tracking-wider">
-            SARI GOLD
-          </div>
-          <div className="font-ui text-[10px] text-muted-foreground mt-1">
-            Kuyumculuk · Eleşkirt / Ağrı
+        <div className="flex items-center gap-3 text-center md:text-left">
+          <img
+            src={logoAsset.url}
+            alt="Sarı Gold Kuyumculuk logo"
+            className="h-12 w-12 rounded-full border border-primary/35 object-cover"
+            width={48}
+            height={48}
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <div className="font-display text-2xl text-gradient-gold tracking-wider">
+              SARI GOLD
+            </div>
+            <div className="font-ui text-[10px] text-muted-foreground mt-1">
+              Kuyumculuk · Eleşkirt / Ağrı
+            </div>
           </div>
         </div>
 

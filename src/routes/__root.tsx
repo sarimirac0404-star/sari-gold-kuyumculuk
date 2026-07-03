@@ -12,7 +12,20 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
+import logoAsset from "@/assets/sari-gold-logo.jpeg.asset.json";
 
+const SITE_URL = "https://sari-gold-kuyumculuk.com";
+const BRAND_NAME = "Sarı Gold Kuyumculuk";
+const BRAND_NAME_VARIANTS = [
+  "Sarı Gold Kuyumculuk",
+  "SARI GOLD KUYUMCULUK",
+  "sarı gold kuyumculuk",
+  "Sari Gold Kuyumculuk",
+  "SARI GOLD",
+  "sari gold",
+  "sarigold kuyumculuk",
+];
+const LOGO_URL = `${SITE_URL}${logoAsset.url}`;
 
 function NotFoundComponent() {
   return (
@@ -80,17 +93,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#0a0a0a" },
-      { title: "Sarı Gold Kuyumculuk" },
-      { name: "description", content: "Altının İhtişamı, Güvenin Adresi — Eleşkirt / Ağrı" },
+      { title: `${BRAND_NAME} | SARI GOLD KUYUMCULUK` },
+      { name: "description", content: "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı kuyumcu: canlı altın fiyatları, bilezik, yüzük, kolye, küpe ve zarif altın koleksiyonları." },
+      { name: "keywords", content: `${BRAND_NAME_VARIANTS.join(", ")}, Eleşkirt kuyumcu, Ağrı kuyumcu, altın fiyatları, sarı gold eleşkirt` },
       { name: "google-site-verification", content: "6FN4S1VFmXPjDb4VLCcMV2BDM_p4BhbiLWE10B0LM_o" },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: BRAND_NAME },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Sarı Gold Kuyumculuk" },
-      { name: "twitter:title", content: "Sarı Gold Kuyumculuk" },
+      { property: "og:title", content: `${BRAND_NAME} — Eleşkirt / Ağrı` },
+      { name: "twitter:title", content: `${BRAND_NAME} — Eleşkirt / Ağrı` },
       { property: "og:description", content: "Altının İhtişamı, Güvenin Adresi — Eleşkirt / Ağrı" },
       { name: "twitter:description", content: "Altının İhtişamı, Güvenin Adresi — Eleşkirt / Ağrı" },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/voeu8TtRyQVMF66hVdwt71AeNLO2/social-images/social-1781793689305-WhatsApp_Image_2025-12-02_at_12.33.05.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/voeu8TtRyQVMF66hVdwt71AeNLO2/social-images/social-1781793689305-WhatsApp_Image_2025-12-02_at_12.33.05.webp" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -104,7 +117,42 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "shortcut icon", href: "/favicon.ico" },
       { rel: "apple-touch-icon", href: "/favicon.png" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "JewelryStore",
+          name: BRAND_NAME,
+          alternateName: BRAND_NAME_VARIANTS,
+          url: SITE_URL,
+          logo: LOGO_URL,
+          image: LOGO_URL,
+          telephone: "+90 533 814 46 51",
+          sameAs: ["https://www.instagram.com/sarigold_kuyumculuk"],
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Cumhuriyet Cd.",
+            addressLocality: "Eleşkirt",
+            addressRegion: "Ağrı",
+            postalCode: "04600",
+            addressCountry: "TR",
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: BRAND_NAME,
+          alternateName: BRAND_NAME_VARIANTS,
+          url: SITE_URL,
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
