@@ -29,6 +29,12 @@ export const Route = createFileRoute("/kategori/$slug")({
           loaderData?.category.intro ??
           "Sarı Gold Kuyumculuk ürün koleksiyonu.",
       },
+      { property: "og:url", content: `https://sari-gold-kuyumculuk.com/kategori/${loaderData?.category.slug ?? ""}` },
+      { property: "og:title", content: `${loaderData?.category.name ?? "Kategori"} — Sarı Gold Kuyumculuk` },
+      { property: "og:description", content: loaderData?.category.intro ?? "Sarı Gold Kuyumculuk ürün koleksiyonu." },
+    ],
+    links: [
+      { rel: "canonical", href: `https://sari-gold-kuyumculuk.com/kategori/${loaderData?.category.slug ?? ""}` },
     ],
   }),
   component: CategoryPage,
