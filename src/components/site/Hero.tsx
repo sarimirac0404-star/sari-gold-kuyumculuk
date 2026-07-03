@@ -1,3 +1,5 @@
+import logoAsset from "@/assets/sari-gold-logo.jpeg.asset.json";
+
 export function Hero() {
   return (
     <section
@@ -33,6 +35,15 @@ export function Hero() {
           <span className="font-ui text-[10px] text-primary">Eleşkirt</span>
           <span className="h-px w-16 bg-gradient-to-l from-transparent to-primary" />
         </div>
+
+        <img
+          src={logoAsset.url}
+          alt="Sarı Gold Kuyumculuk logo"
+          className="mx-auto mb-8 h-28 w-28 rounded-full border border-primary/35 object-cover shadow-gold-strong md:h-36 md:w-36"
+          width={144}
+          height={144}
+          decoding="async"
+        />
 
         <h1 className="shimmer font-display text-5xl md:text-7xl lg:text-8xl leading-[1.05] font-bold">
           SARI GOLD
