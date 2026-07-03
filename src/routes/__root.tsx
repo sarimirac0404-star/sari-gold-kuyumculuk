@@ -103,6 +103,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "apple-touch-icon", href: "/favicon.png" },
+    ],
+  }),
+  // keywords include case/spacing variations so search engines match all forms
+  // sarigold, sarı gold, SARI GOLD, Sari Gold Kuyumculuk
     ],
   }),
   shellComponent: RootShell,
