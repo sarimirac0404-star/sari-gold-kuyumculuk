@@ -20,14 +20,14 @@ export const Route = createFileRoute("/")({
           "Sarı Gold Kuyumculuk — Eleşkirt'in güvenilir kuyumcusu. 22 ayar & 14 ayar altın, bilezik, yüzük, kolye, küpe ve anlık altın & döviz fiyatları. Cumhuriyet Cd., Eleşkirt / Ağrı.",
       },
       { property: "og:title", content: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı" },
-      { property: "og:url", content: "https://sari-gold-kuyumculuk.lovable.app/" },
+      { property: "og:url", content: "https://sari-gold-kuyumculuk.com/" },
       {
         property: "og:description",
         content: "Altının İhtişamı, Güvenin Adresi — Eleşkirt / Ağrı. 22 & 14 ayar altın, bilezik, yüzük, kolye, küpe.",
       },
     ],
     links: [
-      { rel: "canonical", href: "https://sari-gold-kuyumculuk.lovable.app/" },
+      { rel: "canonical", href: "https://sari-gold-kuyumculuk.com/" },
     ],
   }),
   component: Index,
