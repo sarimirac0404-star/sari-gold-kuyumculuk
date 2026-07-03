@@ -82,6 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#0a0a0a" },
       { title: "Sarı Gold Kuyumculuk" },
       { name: "description", content: "Altının İhtişamı, Güvenin Adresi — Eleşkirt / Ağrı" },
+      { name: "google-site-verification", content: "6FN4S1VFmXPjDb4VLCcMV2BDM_p4BhbiLWE10B0LM_o" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:title", content: "Sarı Gold Kuyumculuk" },
