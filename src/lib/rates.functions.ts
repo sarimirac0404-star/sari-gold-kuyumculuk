@@ -124,7 +124,7 @@ export const getRates = createServerFn({ method: "GET" }).handler(
           buying: it ? parseTrNumber(it.RoundPurchasePrice) : 0,
           selling: it ? parseTrNumber(it.RoundSalesPrice) : 0,
         };
-      }).map((r) => applyOffset(r, offsets));
+      });
 
       const currency = all.filter((r) => r.name === "EUR" || r.name === "USD");
       const gold = all.filter((r) => r.name !== "EUR" && r.name !== "USD");
