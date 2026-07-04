@@ -10,7 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as AdminRouteImport } from './routes/admin'
+import { Route as SariRouteImport } from './routes/sari'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as KategoriSlugRouteImport } from './routes/kategori.$slug'
 
@@ -19,9 +19,9 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const SariRoute = SariRouteImport.update({
+  id: '/sari',
+  path: '/sari',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -37,34 +37,34 @@ const KategoriSlugRoute = KategoriSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/sari': typeof SariRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/kategori/$slug': typeof KategoriSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/sari': typeof SariRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/kategori/$slug': typeof KategoriSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/sari': typeof SariRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/kategori/$slug': typeof KategoriSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/sitemap.xml' | '/kategori/$slug'
+  fullPaths: '/' | '/sari' | '/sitemap.xml' | '/kategori/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/sitemap.xml' | '/kategori/$slug'
-  id: '__root__' | '/' | '/admin' | '/sitemap.xml' | '/kategori/$slug'
+  to: '/' | '/sari' | '/sitemap.xml' | '/kategori/$slug'
+  id: '__root__' | '/' | '/sari' | '/sitemap.xml' | '/kategori/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  SariRoute: typeof SariRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   KategoriSlugRoute: typeof KategoriSlugRoute
 }
@@ -78,11 +78,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
+    '/sari': {
+      id: '/sari'
+      path: '/sari'
+      fullPath: '/sari'
+      preLoaderRoute: typeof SariRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -104,7 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  SariRoute: SariRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   KategoriSlugRoute: KategoriSlugRoute,
 }

@@ -29,7 +29,7 @@ import {
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/sari")({
   head: () => ({
     meta: [
       { title: "Yönetim" },
