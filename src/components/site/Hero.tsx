@@ -51,6 +51,14 @@ export function Hero() {
         <p className="font-display text-2xl md:text-4xl text-gold-pale mt-2 tracking-[0.3em]">
           KUYUMCULUK
         </p>
+        <p className="font-serif text-base md:text-lg text-foreground/70 mt-6 tracking-wide">
+          Sarı Gold Kuyumculuk · Eleşkirt / Ağrı
+        </p>
+        <span className="sr-only">
+          Sarı Gold Kuyumculuk, sarı gold kuyumculuk, SARI GOLD KUYUMCULUK, Sari Gold Kuyumculuk, sarigold kuyumculuk — Eleşkirt Ağrı kuyumcu.
+        </span>
+
+
 
         <p className="mt-10 font-serif text-xl md:text-2xl text-foreground/85 italic">
           “Altının İhtişamı, Güvenin Adresi”
