@@ -95,13 +95,16 @@ export const getRates = createServerFn({ method: "GET" }).handler(
 
     try {
       const res = await fetch(
-        "https://kurpano.com/CustomHome/GetCurrentCompanyProductPrice",
+        `https://kurpano.com/CustomHome/GetCurrentCompanyProductPrice?_=${Date.now()}`,
         {
           headers: {
             "user-agent": "Mozilla/5.0",
             accept: "application/json",
             referer: "https://kurpano.com/sarigold",
+            "cache-control": "no-cache",
+            pragma: "no-cache",
           },
+          cache: "no-store",
         },
       );
       if (!res.ok) {
@@ -115,7 +118,7 @@ export const getRates = createServerFn({ method: "GET" }).handler(
       const byName = new Map<string, KurpanoItem>();
       for (const it of data.Value) byName.set(it.ProductName.trim(), it);
 
-      const offsets = await loadOffsets();
+      
 
       const all: GoldRate[] = ALLOWED.map((name) => {
         const it = byName.get(name);
@@ -124,7 +127,7 @@ export const getRates = createServerFn({ method: "GET" }).handler(
           buying: it ? parseTrNumber(it.RoundPurchasePrice) : 0,
           selling: it ? parseTrNumber(it.RoundSalesPrice) : 0,
         };
-      }).map((r) => applyOffset(r, offsets));
+      });
 
       const currency = all.filter((r) => r.name === "EUR" || r.name === "USD");
       const gold = all.filter((r) => r.name !== "EUR" && r.name !== "USD");
