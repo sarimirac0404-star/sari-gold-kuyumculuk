@@ -220,7 +220,23 @@ function AdminPage() {
           >
             Kur Farkları
           </button>
+          <button
+            onClick={() => {
+              setAuthed(false);
+              setUsername("");
+              setPw1("");
+              setPw2("");
+              setPw3("");
+              setProducts([]);
+              setForm(makeEmptyForm());
+              toast.success("Çıkış yapıldı");
+            }}
+            className="ml-auto px-4 py-2 font-ui text-xs uppercase tracking-widest text-destructive hover:text-destructive/80 border border-destructive/40 hover:border-destructive/70 transition-colors"
+          >
+            Çıkış Yap
+          </button>
         </div>
+
 
         {tab === "rates" ? (
           <>
