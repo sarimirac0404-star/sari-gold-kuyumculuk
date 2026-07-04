@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
+import { NotificationWatcher } from "@/components/site/NotificationWatcher";
 import logoAsset from "@/assets/sari-gold-logo.jpeg.asset.json";
 
 const SITE_URL = "https://sari-gold-kuyumculuk.com";
@@ -187,7 +188,9 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <NotificationWatcher />
       <Toaster richColors position="top-center" />
     </QueryClientProvider>
+
   );
 }
