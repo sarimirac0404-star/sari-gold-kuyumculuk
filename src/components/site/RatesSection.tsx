@@ -69,11 +69,13 @@ export function RatesSection() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["rates"],
     queryFn: () => fetchRates(),
-    refetchInterval: 15_000,
+    refetchInterval: 5_000,
     refetchIntervalInBackground: true,
     refetchOnWindowFocus: true,
     refetchOnReconnect: true,
+    refetchOnMount: "always",
     staleTime: 0,
+    gcTime: 0,
   });
 
 
