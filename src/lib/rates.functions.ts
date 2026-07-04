@@ -95,13 +95,16 @@ export const getRates = createServerFn({ method: "GET" }).handler(
 
     try {
       const res = await fetch(
-        "https://kurpano.com/CustomHome/GetCurrentCompanyProductPrice",
+        `https://kurpano.com/CustomHome/GetCurrentCompanyProductPrice?_=${Date.now()}`,
         {
           headers: {
             "user-agent": "Mozilla/5.0",
             accept: "application/json",
             referer: "https://kurpano.com/sarigold",
+            "cache-control": "no-cache",
+            pragma: "no-cache",
           },
+          cache: "no-store",
         },
       );
       if (!res.ok) {
