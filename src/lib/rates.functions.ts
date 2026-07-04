@@ -115,7 +115,7 @@ export const getRates = createServerFn({ method: "GET" }).handler(
       const byName = new Map<string, KurpanoItem>();
       for (const it of data.Value) byName.set(it.ProductName.trim(), it);
 
-      const offsets = await loadOffsets();
+      
 
       const all: GoldRate[] = ALLOWED.map((name) => {
         const it = byName.get(name);
