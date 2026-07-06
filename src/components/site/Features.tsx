@@ -3,7 +3,7 @@ import { Sparkles, BadgeDollarSign, Handshake } from "lucide-react";
 const ITEMS = [
   { Icon: Sparkles, title: "Şık ve Zarif Tasarımlar", desc: "Zamansız zarafet, özenli el işçiliği.", href: "#urunler" },
   { Icon: BadgeDollarSign, title: "En İyi Fiyat", desc: "Piyasanın en rekabetçi değerleri.", href: "#canli-kur" },
-  { Icon: Handshake, title: "Güvenilir Hizmet", desc: "Yılların verdiği itibar ve güven.", href: "#hakkimizda" },
+  { Icon: Handshake, title: "Güvenilir Hizmet", desc: "Eleşkirt / Ağrı'ya ait, samimi ve şeffaf kuyumculuk hizmeti.", href: "#hakkimizda" },
 ];
 
 export function Features() {
