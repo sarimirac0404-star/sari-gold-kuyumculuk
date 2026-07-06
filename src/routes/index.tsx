@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
         content:
           "Sarı Gold Kuyumculuk, SARI GOLD KUYUMCULUK, sarı gold kuyumculuk, Sari Gold Kuyumculuk, SARI GOLD, sari gold, sarigold kuyumculuk, Eleşkirt kuyumcu, Ağrı kuyumcu, altın fiyatları",
       },
-      { property: "og:title", content: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı Kuyumcu | Altın, Bilezik, Yüzük" },
+      { property: "og:title", content: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı Kuyumcu" },
       { property: "og:url", content: `${SITE_URL}/` },
       {
         property: "og:description",
