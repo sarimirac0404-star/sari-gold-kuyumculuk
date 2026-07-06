@@ -94,6 +94,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#0a0a0a" },
+      { name: "google", content: "notranslate" },
       { title: `${BRAND_NAME} | SARI GOLD KUYUMCULUK` },
       { name: "description", content: "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı kuyumcu: canlı altın fiyatları, bilezik, yüzük, kolye, küpe ve zarif altın koleksiyonları." },
       { name: "keywords", content: `${BRAND_NAME_VARIANTS.join(", ")}, Eleşkirt kuyumcu, Ağrı kuyumcu, altın fiyatları, sarı gold eleşkirt` },
