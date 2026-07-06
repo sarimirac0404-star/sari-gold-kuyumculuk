@@ -22,6 +22,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/kategori/kupeler", changefreq: "weekly", priority: "0.8" },
           { path: "/kategori/kelepceler", changefreq: "weekly", priority: "0.8" },
           { path: "/kategori/gerdanliklar", changefreq: "weekly", priority: "0.8" },
+          { path: "/kategori/setler", changefreq: "weekly", priority: "0.8" },
+          { path: "/kategori/kolye-uclari", changefreq: "weekly", priority: "0.8" },
         ];
 
         const urls = entries.map((e) =>
