@@ -27,7 +27,7 @@ export function About() {
           <div className="mt-10 grid grid-cols-1 gap-6 max-w-[180px]">
             <div>
               <div className="font-display text-3xl text-gradient-gold">%100</div>
-              <div className="font-ui text-[10px] text-muted-foreground mt-1">Garanti</div>
+              <div className="font-ui text-[10px] text-muted-foreground mt-1">Güven</div>
             </div>
           </div>
         </div>
