@@ -17,7 +17,7 @@ const LOGO_URL = `${SITE_URL}${logoAsset.url}`;
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı Kuyumcu | Altın, Bilezik, Yüzük" },
+      { title: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı Kuyumcu" },
       {
         name: "description",
         content:
