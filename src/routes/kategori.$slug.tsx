@@ -2,12 +2,12 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { ArrowLeft, ImageIcon } from "lucide-react";
+import { ArrowLeft, ImageIcon, X, ZoomIn } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
 import { CategoryIcon } from "@/components/site/CategoryIcon";
-import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
 import { getCategory, CATEGORIES, type Product } from "@/lib/products";
 import { listProducts } from "@/lib/products.functions";
 
@@ -104,18 +104,30 @@ function ProductDialog({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
+  const [zoomed, setZoomed] = useState(false);
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl bg-card border-primary/40 p-0 overflow-hidden">
+    <>
+    <Dialog open={open} onOpenChange={(o) => { if (!o) setZoomed(false); onOpenChange(o); }}>
+      <DialogContent className="max-w-3xl bg-card border-primary/40 p-0 overflow-hidden [&>button.absolute]:hidden">
         {product && (
           <div className="grid md:grid-cols-2 gap-0">
-            <div className="aspect-square bg-gradient-to-br from-background to-card flex items-center justify-center overflow-hidden">
+            <button
+              type="button"
+              onClick={() => product.image && setZoomed(true)}
+              className="relative aspect-square bg-gradient-to-br from-background to-card flex items-center justify-center overflow-hidden group cursor-zoom-in"
+              aria-label="Fotoğrafı büyüt"
+            >
               {product.image ? (
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-contain"
-                />
+                <>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-contain"
+                  />
+                  <span className="absolute bottom-3 right-3 bg-black/60 text-primary p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ZoomIn size={16} />
+                  </span>
+                </>
               ) : (
                 <div className="flex flex-col items-center gap-3 text-primary/40">
                   <ImageIcon size={64} strokeWidth={1} />
@@ -124,7 +136,7 @@ function ProductDialog({
                   </span>
                 </div>
               )}
-            </div>
+            </button>
             <div className="p-8 flex flex-col justify-center">
               <div className="font-ui text-[10px] text-primary mb-3">Ürün Detayı</div>
               <DialogTitle className="font-display text-2xl md:text-3xl text-gradient-gold">
@@ -149,8 +161,35 @@ function ProductDialog({
             </div>
           </div>
         )}
+        <DialogClose
+          aria-label="Kapat"
+          className="absolute right-3 top-3 z-50 flex items-center justify-center w-11 h-11 rounded-full bg-background/90 border border-primary/50 text-primary shadow-lg hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+        >
+          <X className="h-5 w-5" strokeWidth={2.5} />
+        </DialogClose>
       </DialogContent>
     </Dialog>
+
+    {product?.image && (
+      <Dialog open={zoomed} onOpenChange={setZoomed}>
+        <DialogContent className="max-w-[95vw] w-auto bg-transparent border-0 shadow-none p-0 [&>button.absolute]:hidden">
+          <DialogTitle className="sr-only">{product.name}</DialogTitle>
+          <DialogDescription className="sr-only">Büyütülmüş ürün fotoğrafı</DialogDescription>
+          <img
+            src={product.image}
+            alt={product.name}
+            className="max-h-[90vh] max-w-[95vw] object-contain mx-auto"
+          />
+          <DialogClose
+            aria-label="Kapat"
+            className="absolute right-3 top-3 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-background/90 border border-primary/50 text-primary shadow-lg hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+          >
+            <X className="h-6 w-6" strokeWidth={2.5} />
+          </DialogClose>
+        </DialogContent>
+      </Dialog>
+    )}
+    </>
   );
 }
 
