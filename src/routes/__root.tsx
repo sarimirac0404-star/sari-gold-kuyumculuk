@@ -99,7 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "apple-mobile-web-app-title", content: BRAND_NAME },
       { name: "author", content: BRAND_NAME },
       { name: "google", content: "notranslate" },
-      { name: "description", content: "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı'da 22 ayar ve 14 ayar altın takı, canlı altın fiyatları ve özenli kuyumculuk hizmeti sunuyor. Cumhuriyet Cd., 04600 Eleşkirt/Ağrı." },
+      { name: "description", content: "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı'da 22 ayar ve 14 ayar altın takı, canlı altın fiyatları ve özenli kuyumculuk hizmeti sunar. Cumhuriyet Cd." },
       { name: "keywords", content: `${BRAND_NAME_VARIANTS.join(", ")}, Eleşkirt kuyumcu, Ağrı kuyumcu, altın fiyatları, sarı gold eleşkirt` },
       { name: "google-site-verification", content: "6FN4S1VFmXPjDb4VLCcMV2BDM_p4BhbiLWE10B0LM_o" },
       { property: "og:locale", content: "tr_TR" },
