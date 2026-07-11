@@ -32,7 +32,7 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/sari")({
   head: () => ({
     meta: [
-      { title: "Yönetim" },
+      { title: "Yönetim — Sarı Gold Kuyumculuk" },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),

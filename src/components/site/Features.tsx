@@ -3,13 +3,15 @@ import { Sparkles, BadgeDollarSign, Handshake } from "lucide-react";
 const ITEMS = [
   { Icon: Sparkles, title: "Şık ve Zarif Tasarımlar", desc: "Zamansız zarafet, özenli el işçiliği.", href: "#urunler" },
   { Icon: BadgeDollarSign, title: "En İyi Fiyat", desc: "Piyasanın en rekabetçi değerleri.", href: "#canli-kur" },
-  { Icon: Handshake, title: "Güvenilir Hizmet", desc: "Eleşkirt'te samimi, şeffaf ve müşteri odaklı kuyumculuk hizmeti.", href: "#hakkimizda" },
+  { Icon: Handshake, title: "Samimi Hizmet", desc: "Eleşkirt'te şeffaf ve müşteri odaklı kuyumculuk hizmeti.", href: "#hakkimizda" },
 ];
 
 export function Features() {
   return (
     <section className="py-20 border-y border-border bg-background">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 grid md:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <h2 className="sr-only">Sarı Gold Kuyumculuk Hizmetleri</h2>
+        <div className="grid md:grid-cols-3 gap-8">
         {ITEMS.map(({ Icon, title, desc, href }, i) => (
           <a
             key={title}
@@ -26,6 +28,7 @@ export function Features() {
             </div>
           </a>
         ))}
+        </div>
       </div>
     </section>
   );

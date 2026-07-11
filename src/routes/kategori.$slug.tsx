@@ -29,13 +29,50 @@ export const Route = createFileRoute("/kategori/$slug")({
           loaderData?.category.intro ??
           "Sarı Gold Kuyumculuk ürün koleksiyonu.",
       },
-      { property: "og:url", content: `https://sari-gold-kuyumculuk.com/kategori/${loaderData?.category.slug ?? ""}` },
+      { property: "og:url", content: `https://sari-gold-kuyumculuk.lovable.app/kategori/${loaderData?.category.slug ?? ""}` },
+      { property: "og:type", content: "website" },
       { property: "og:title", content: `${loaderData?.category.name ?? "Kategori"} — Sarı Gold Kuyumculuk` },
       { property: "og:description", content: loaderData?.category.intro ?? "Sarı Gold Kuyumculuk ürün koleksiyonu." },
     ],
     links: [
-      { rel: "canonical", href: `https://sari-gold-kuyumculuk.com/kategori/${loaderData?.category.slug ?? ""}` },
+      { rel: "canonical", href: `https://sari-gold-kuyumculuk.lovable.app/kategori/${loaderData?.category.slug ?? ""}` },
     ],
+    scripts: loaderData?.category
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CollectionPage",
+              name: `${loaderData.category.name} — Sarı Gold Kuyumculuk`,
+              description: loaderData.category.intro,
+              url: `https://sari-gold-kuyumculuk.lovable.app/kategori/${loaderData.category.slug}`,
+              inLanguage: "tr-TR",
+            }),
+          },
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Anasayfa",
+                  item: "https://sari-gold-kuyumculuk.lovable.app/",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: loaderData.category.name,
+                  item: `https://sari-gold-kuyumculuk.lovable.app/kategori/${loaderData.category.slug}`,
+                },
+              ],
+            }),
+          },
+        ]
+      : [],
   }),
   component: CategoryPage,
   errorComponent: ({ error }) => (

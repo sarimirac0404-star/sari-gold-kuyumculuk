@@ -11,7 +11,7 @@ import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
 import { useReveal } from "@/hooks/use-reveal";
 import logoAsset from "@/assets/sari-gold-logo.jpeg.asset.json";
 
-const SITE_URL = "https://sari-gold-kuyumculuk.com";
+const SITE_URL = "https://sari-gold-kuyumculuk.lovable.app";
 const LOGO_URL = `${SITE_URL}${logoAsset.url}`;
 
 export const Route = createFileRoute("/")({
@@ -30,10 +30,13 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:title", content: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı Kuyumcu" },
       { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:type", content: "website" },
       {
         property: "og:description",
         content: "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı'da 22 ayar ve 14 ayar altın takı, canlı altın fiyatları ve özenli kuyumculuk hizmeti sunar. Cumhuriyet Cd.",
       },
+      { property: "og:image", content: LOGO_URL },
+      { name: "twitter:image", content: LOGO_URL },
     ],
     links: [
       { rel: "canonical", href: `${SITE_URL}/` },

@@ -1,0 +1,18 @@
+# Sarı Gold Kuyumculuk
+
+> Eleşkirt / Ağrı'da altın takı, ürün koleksiyonları ve canlı altın fiyatları sunan kuyumculuk sitesi.
+
+Sarı Gold Kuyumculuk, Cumhuriyet Cd., 04600 Eleşkirt/Ağrı adresinde hizmet veren yerel kuyumculuk işletmesidir. Sitede canlı kur bilgisi, ürün kategorileri, mağaza iletişim bilgileri ve konum bilgisi yer alır.
+
+## Pages
+
+- [Anasayfa](/): Sarı Gold Kuyumculuk, canlı kur, koleksiyonlar, hakkımızda ve iletişim bilgileri.
+- [Yüzükler](/kategori/yuzukler): Yüzük koleksiyonu.
+- [Kolyeler](/kategori/kolyeler): Kolye koleksiyonu.
+- [Bilezikler](/kategori/bilezikler): Bilezik koleksiyonu.
+- [Bileklikler](/kategori/bileklikler): Bileklik koleksiyonu.
+- [Küpeler](/kategori/kupeler): Küpe koleksiyonu.
+- [Kelepçeler](/kategori/kelepceler): Kelepçe koleksiyonu.
+- [Gerdanlıklar](/kategori/gerdanliklar): Gerdanlık koleksiyonu.
+- [Setler](/kategori/setler): Takı setleri koleksiyonu.
+- [Kolye Uçları](/kategori/kolye-uclari): Kolye ucu koleksiyonu.

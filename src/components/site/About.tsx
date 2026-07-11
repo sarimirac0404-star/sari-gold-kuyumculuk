@@ -5,7 +5,7 @@ export function About() {
         <div className="reveal">
           <div className="font-ui text-[10px] text-primary mb-3">Hakkımızda</div>
           <h2 className="font-display text-4xl md:text-5xl text-gradient-gold leading-tight">
-            Geleneğin & Güvenin Buluştuğu Adres
+            Zarafetin Altınla Buluştuğu Adres
           </h2>
 
           <div className="my-8 flex items-center gap-3">

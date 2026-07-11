@@ -15,7 +15,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { NotificationWatcher } from "@/components/site/NotificationWatcher";
 import logoAsset from "@/assets/sari-gold-logo.jpeg.asset.json";
 
-const SITE_URL = "https://sari-gold-kuyumculuk.com";
+const SITE_URL = "https://sari-gold-kuyumculuk.lovable.app";
 const BRAND_NAME = "Sarı Gold Kuyumculuk";
 const BRAND_NAME_VARIANTS = [
   "Sarı Gold Kuyumculuk",
@@ -110,8 +110,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı Kuyumcu" },
       { property: "og:description", content: "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı'da 22 ayar ve 14 ayar altın takı, canlı altın fiyatları ve özenli kuyumculuk hizmeti sunar. Cumhuriyet Cd." },
       { name: "twitter:description", content: "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı'da 22 ayar ve 14 ayar altın takı, canlı altın fiyatları ve özenli kuyumculuk hizmeti sunar. Cumhuriyet Cd." },
-      { property: "og:image", content: LOGO_URL },
-      { name: "twitter:image", content: LOGO_URL },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -134,11 +132,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "JewelryStore",
+          "@id": `${SITE_URL}/#business`,
           name: BRAND_NAME,
           alternateName: BRAND_NAME_VARIANTS,
           url: SITE_URL,
           logo: LOGO_URL,
           image: LOGO_URL,
+          description: "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı'da altın takı, canlı altın fiyatları ve özenli kuyumculuk hizmeti sunar.",
+          foundingDate: "2025",
+          inLanguage: "tr-TR",
           telephone: "+90 533 814 46 51",
           sameAs: ["https://www.instagram.com/sarigold_kuyumculuk"],
           address: {
@@ -156,9 +158,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
+          "@id": `${SITE_URL}/#website`,
           name: BRAND_NAME,
           alternateName: BRAND_NAME_VARIANTS,
           url: SITE_URL,
+          inLanguage: "tr-TR",
+          publisher: { "@id": `${SITE_URL}/#business` },
         }),
       },
     ],
