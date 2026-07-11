@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı kuyumcusu. 22 ayar ve 14 ayar altın, bilezik, yüzük, kolye, küpe ile canlı altın ve döviz fiyatları. Cumhuriyet Cd., Eleşkirt.",
+          "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı'da 22 ayar ve 14 ayar altın takı, canlı altın fiyatları ve özenli kuyumculuk hizmeti sunar. Cumhuriyet Cd.",
       },
       {
         name: "keywords",
@@ -32,10 +32,8 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: `${SITE_URL}/` },
       {
         property: "og:description",
-        content: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı kuyumcusu. 22 ayar ve 14 ayar altın, bilezik, yüzük, kolye, küpe ile canlı altın ve döviz fiyatları. Cumhuriyet Cd., Eleşkirt.",
+        content: "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı'da 22 ayar ve 14 ayar altın takı, canlı altın fiyatları ve özenli kuyumculuk hizmeti sunar. Cumhuriyet Cd.",
       },
-      { property: "og:image", content: LOGO_URL },
-      { name: "twitter:image", content: LOGO_URL },
     ],
     links: [
       { rel: "canonical", href: `${SITE_URL}/` },

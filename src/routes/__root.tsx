@@ -95,18 +95,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#0a0a0a" },
       { title: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı Kuyumcu" },
-      { name: "description", content: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı kuyumcusu. 22 ayar ve 14 ayar altın, bilezik, yüzük, kolye, küpe ile canlı altın ve döviz fiyatları. Cumhuriyet Cd., Eleşkirt." },
+      { name: "application-name", content: BRAND_NAME },
+      { name: "apple-mobile-web-app-title", content: BRAND_NAME },
+      { name: "author", content: BRAND_NAME },
+      { name: "google", content: "notranslate" },
+      { name: "description", content: "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı'da 22 ayar ve 14 ayar altın takı, canlı altın fiyatları ve özenli kuyumculuk hizmeti sunar. Cumhuriyet Cd." },
       { name: "keywords", content: `${BRAND_NAME_VARIANTS.join(", ")}, Eleşkirt kuyumcu, Ağrı kuyumcu, altın fiyatları, sarı gold eleşkirt` },
       { name: "google-site-verification", content: "6FN4S1VFmXPjDb4VLCcMV2BDM_p4BhbiLWE10B0LM_o" },
+      { property: "og:locale", content: "tr_TR" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: BRAND_NAME },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:title", content: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı Kuyumcu" },
       { name: "twitter:title", content: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı Kuyumcu" },
-      { property: "og:description", content: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı kuyumcusu. 22 ayar ve 14 ayar altın, bilezik, yüzük, kolye, küpe ile canlı altın ve döviz fiyatları. Cumhuriyet Cd., Eleşkirt." },
-      { name: "twitter:description", content: "Sarı Gold Kuyumculuk — Eleşkirt / Ağrı kuyumcusu. 22 ayar ve 14 ayar altın, bilezik, yüzük, kolye, küpe ile canlı altın ve döviz fiyatları. Cumhuriyet Cd., Eleşkirt." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/voeu8TtRyQVMF66hVdwt71AeNLO2/social-images/social-1783097538070-WhatsApp_Image_2026-01-17_at_10.18.42.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/voeu8TtRyQVMF66hVdwt71AeNLO2/social-images/social-1783097538070-WhatsApp_Image_2026-01-17_at_10.18.42.webp" },
+      { property: "og:description", content: "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı'da 22 ayar ve 14 ayar altın takı, canlı altın fiyatları ve özenli kuyumculuk hizmeti sunar. Cumhuriyet Cd." },
+      { name: "twitter:description", content: "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı'da 22 ayar ve 14 ayar altın takı, canlı altın fiyatları ve özenli kuyumculuk hizmeti sunar. Cumhuriyet Cd." },
+      { property: "og:image", content: LOGO_URL },
+      { name: "twitter:image", content: LOGO_URL },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -166,7 +171,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="tr">
+    <html lang="tr" translate="no">
       <head>
         <HeadContent />
       </head>

@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /admin
+Disallow: /sari
 
-Sitemap:https://sari-gold-kuyumculuk.com/sitemap.xml
+Sitemap: https://sari-gold-kuyumculuk.com/sitemap.xml
