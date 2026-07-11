@@ -32,7 +32,7 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: `${SITE_URL}/` },
       {
         property: "og:description",
-        content: "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı'da 22 ayar ve 14 ayar altın takı, canlı altın fiyatları ve özenli kuyumculuk hizmeti sunuyor. Cumhuriyet Cd., 04600 Eleşkirt/Ağrı.",
+        content: "Sarı Gold Kuyumculuk, Eleşkirt / Ağrı'da 22 ayar ve 14 ayar altın takı, canlı altın fiyatları ve özenli kuyumculuk hizmeti sunar. Cumhuriyet Cd.",
       },
     ],
     links: [
