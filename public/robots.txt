@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /sari
 
-Sitemap: https://sari-gold-kuyumculuk.com/sitemap.xml
+Sitemap: https://sari-gold-kuyumculuk.lovable.app/sitemap.xml

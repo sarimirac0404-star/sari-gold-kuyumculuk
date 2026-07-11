@@ -46,10 +46,10 @@ export function Hero() {
         />
 
         <h1 className="shimmer font-display text-5xl md:text-7xl lg:text-8xl leading-[1.05] font-bold">
-          SARI GOLD
+          Sarı Gold Kuyumculuk
         </h1>
-        <p className="font-display text-2xl md:text-4xl text-gold-pale mt-2 tracking-[0.3em]">
-          KUYUMCULUK
+        <p className="font-display text-2xl md:text-4xl text-gold-pale mt-2">
+          Eleşkirt / Ağrı
         </p>
         <p className="font-serif text-base md:text-lg text-foreground/70 mt-6 tracking-wide">
           Sarı Gold Kuyumculuk · Eleşkirt / Ağrı
@@ -61,7 +61,7 @@ export function Hero() {
 
 
         <p className="mt-10 font-serif text-xl md:text-2xl text-foreground/85 italic">
-          “Altının İhtişamı, Güvenin Adresi”
+          “Altının İhtişamı, Zarafetin Adresi”
         </p>
 
         <div className="mt-12">
