@@ -497,6 +497,7 @@ function ProductDialog({
           data: {
             password,
             id: initial.id,
+            category_slug: categorySlug,
             name,
             description,
             karat,
