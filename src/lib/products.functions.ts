@@ -52,6 +52,7 @@ const AddSchema = z.object({
 const UpdateSchema = z.object({
   password: z.string().min(1).max(200),
   id: z.string().uuid(),
+  category_slug: z.string().min(1).max(50).optional(),
   name: z.string().min(1).max(200),
   description: z.string().max(2000).default(""),
   karat: KaratSchema.optional(),
@@ -249,6 +250,7 @@ export const updateProduct = createServerFn({ method: "POST" })
         name: data.name,
         description: data.description,
         image_path,
+        ...(data.category_slug ? { category_slug: data.category_slug } : {}),
         ...(data.karat ? { karat: data.karat } : {}),
         updated_at: new Date().toISOString(),
       })
