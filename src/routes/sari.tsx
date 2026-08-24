@@ -528,23 +528,21 @@ function ProductDialog({
         </DialogTitle>
         <DialogDescription className="sr-only">Ürün formu</DialogDescription>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {mode === "add" && (
-            <div className="space-y-2">
-              <Label>Kategori</Label>
-              <Select value={categorySlug} onValueChange={setCategorySlug}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {CATEGORIES.map((c) => (
-                    <SelectItem key={c.slug} value={c.slug}>
-                      {c.icon} {c.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          )}
+          <div className="space-y-2">
+            <Label>Kategori</Label>
+            <Select value={categorySlug} onValueChange={setCategorySlug}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {CATEGORIES.map((c) => (
+                  <SelectItem key={c.slug} value={c.slug}>
+                    {c.icon} {c.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
           <div className="space-y-2">
             <Label>Ayar</Label>
             <Select value={karat} onValueChange={(v) => setKarat(v as "14K" | "22K")}>
