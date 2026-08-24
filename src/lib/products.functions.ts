@@ -52,6 +52,7 @@ const AddSchema = z.object({
 const UpdateSchema = z.object({
   password: z.string().min(1).max(200),
   id: z.string().uuid(),
+  category_slug: z.string().min(1).max(50).optional(),
   name: z.string().min(1).max(200),
   description: z.string().max(2000).default(""),
   karat: KaratSchema.optional(),
