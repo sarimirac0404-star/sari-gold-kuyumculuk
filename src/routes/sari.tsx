@@ -89,6 +89,7 @@ function AdminPage() {
   const [form, setForm] = useState<FormState>(makeEmptyForm);
   const [products, setProducts] = useState<DbProduct[]>([]);
   const [tab, setTab] = useState<"rates" | "products">("products");
+  const [adding, setAdding] = useState(false);
 
   async function refreshProducts(pw: string) {
     const res = await fetchProducts({ data: { password: pw } });
@@ -199,42 +200,49 @@ function AdminPage() {
   return (
     <main className="min-h-screen bg-background p-6">
       <div className="max-w-5xl mx-auto">
-        <div className="flex items-center gap-2 mb-8 border-b border-border">
-          <button
-            onClick={() => setTab("products")}
-            className={`px-5 py-3 font-ui text-xs uppercase tracking-widest transition-colors ${
-              tab === "products"
-                ? "text-primary border-b-2 border-primary"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Ürünler & Fotoğraflar
-          </button>
-          <button
-            onClick={() => setTab("rates")}
-            className={`px-5 py-3 font-ui text-xs uppercase tracking-widest transition-colors ${
-              tab === "rates"
-                ? "text-primary border-b-2 border-primary"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Kur Farkları
-          </button>
-          <button
-            onClick={() => {
-              setAuthed(false);
-              setUsername("");
-              setPw1("");
-              setPw2("");
-              setPw3("");
-              setProducts([]);
-              setForm(makeEmptyForm());
-              toast.success("Çıkış yapıldı");
-            }}
-            className="ml-auto px-4 py-2 font-ui text-xs uppercase tracking-widest text-destructive hover:text-destructive/80 border border-destructive/40 hover:border-destructive/70 transition-colors"
-          >
-            Çıkış Yap
-          </button>
+        <div className="sticky top-0 z-30 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border -mx-6 px-6 py-3 mb-8">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setTab("products")}
+              className={`px-5 py-3 font-ui text-xs uppercase tracking-widest transition-colors ${
+                tab === "products"
+                  ? "text-primary border-b-2 border-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Ürünler & Fotoğraflar
+            </button>
+            <button
+              onClick={() => setTab("rates")}
+              className={`px-5 py-3 font-ui text-xs uppercase tracking-widest transition-colors ${
+                tab === "rates"
+                  ? "text-primary border-b-2 border-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Kur Farkları
+            </button>
+            {tab === "products" && (
+              <Button onClick={() => setAdding(true)} size="sm" className="ml-4 gap-1.5">
+                <Plus size={14} /> Yeni Ürün
+              </Button>
+            )}
+            <button
+              onClick={() => {
+                setAuthed(false);
+                setUsername("");
+                setPw1("");
+                setPw2("");
+                setPw3("");
+                setProducts([]);
+                setForm(makeEmptyForm());
+                toast.success("Çıkış yapıldı");
+              }}
+              className="ml-auto px-4 py-2 font-ui text-xs uppercase tracking-widest text-destructive hover:text-destructive/80 border border-destructive/40 hover:border-destructive/70 transition-colors"
+            >
+              Çıkış Yap
+            </button>
+          </div>
         </div>
 
 
@@ -292,6 +300,19 @@ function AdminPage() {
             password={password}
             products={products}
             onChanged={() => refreshProducts(password)}
+            onAdd={() => setAdding(true)}
+          />
+        )}
+
+        {adding && (
+          <ProductDialog
+            password={password}
+            mode="add"
+            onClose={() => setAdding(false)}
+            onSaved={async () => {
+              setAdding(false);
+              await refreshProducts(password);
+            }}
           />
         )}
       </div>
@@ -303,13 +324,14 @@ function ProductsManager({
   password,
   products,
   onChanged,
+  onAdd,
 }: {
   password: string;
   products: DbProduct[];
   onChanged: () => void | Promise<void>;
+  onAdd: () => void;
 }) {
   const [editing, setEditing] = useState<DbProduct | null>(null);
-  const [adding, setAdding] = useState(false);
 
   const grouped = CATEGORIES.map((c) => ({
     category: c,
@@ -325,7 +347,7 @@ function ProductsManager({
             Kategoriye fotoğraf ekleyin, açıklamayı düzenleyin veya silin.
           </p>
         </div>
-        <Button onClick={() => setAdding(true)} className="gap-2">
+        <Button onClick={onAdd} className="gap-2">
           <Plus size={16} /> Yeni Ürün
         </Button>
       </div>
@@ -403,17 +425,6 @@ function ProductsManager({
         ))}
       </div>
 
-      {adding && (
-        <ProductDialog
-          password={password}
-          mode="add"
-          onClose={() => setAdding(false)}
-          onSaved={async () => {
-            setAdding(false);
-            await onChanged();
-          }}
-        />
-      )}
       {editing && (
         <ProductDialog
           password={password}
