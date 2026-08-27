@@ -324,13 +324,14 @@ function ProductsManager({
   password,
   products,
   onChanged,
+  onAdd,
 }: {
   password: string;
   products: DbProduct[];
   onChanged: () => void | Promise<void>;
+  onAdd: () => void;
 }) {
   const [editing, setEditing] = useState<DbProduct | null>(null);
-  const [adding, setAdding] = useState(false);
 
   const grouped = CATEGORIES.map((c) => ({
     category: c,
