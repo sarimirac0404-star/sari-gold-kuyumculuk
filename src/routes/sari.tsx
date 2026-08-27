@@ -347,7 +347,7 @@ function ProductsManager({
             Kategoriye fotoğraf ekleyin, açıklamayı düzenleyin veya silin.
           </p>
         </div>
-        <Button onClick={() => setAdding(true)} className="gap-2">
+        <Button onClick={onAdd} className="gap-2">
           <Plus size={16} /> Yeni Ürün
         </Button>
       </div>
@@ -425,17 +425,6 @@ function ProductsManager({
         ))}
       </div>
 
-      {adding && (
-        <ProductDialog
-          password={password}
-          mode="add"
-          onClose={() => setAdding(false)}
-          onSaved={async () => {
-            setAdding(false);
-            await onChanged();
-          }}
-        />
-      )}
       {editing && (
         <ProductDialog
           password={password}
