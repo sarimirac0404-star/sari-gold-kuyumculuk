@@ -221,6 +221,11 @@ function AdminPage() {
             >
               Kur Farkları
             </button>
+            {tab === "products" && (
+              <Button onClick={() => setAdding(true)} size="sm" className="ml-4 gap-1.5">
+                <Plus size={14} /> Yeni Ürün
+              </Button>
+            )}
             <button
               onClick={() => {
                 setAuthed(false);
