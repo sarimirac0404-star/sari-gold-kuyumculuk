@@ -89,6 +89,7 @@ function AdminPage() {
   const [form, setForm] = useState<FormState>(makeEmptyForm);
   const [products, setProducts] = useState<DbProduct[]>([]);
   const [tab, setTab] = useState<"rates" | "products">("products");
+  const [adding, setAdding] = useState(false);
 
   async function refreshProducts(pw: string) {
     const res = await fetchProducts({ data: { password: pw } });
