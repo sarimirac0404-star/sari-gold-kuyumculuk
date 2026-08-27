@@ -300,6 +300,19 @@ function AdminPage() {
             password={password}
             products={products}
             onChanged={() => refreshProducts(password)}
+            onAdd={() => setAdding(true)}
+          />
+        )}
+
+        {adding && (
+          <ProductDialog
+            password={password}
+            mode="add"
+            onClose={() => setAdding(false)}
+            onSaved={async () => {
+              setAdding(false);
+              await refreshProducts(password);
+            }}
           />
         )}
       </div>
