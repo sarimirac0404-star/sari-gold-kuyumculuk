@@ -1,4 +1,5 @@
 import { Instagram, MessageCircle } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import logoAsset from "@/assets/sari-gold-logo.jpeg.asset.json";
 
 export function Footer() {
@@ -46,8 +47,9 @@ export function Footer() {
           </a>
         </div>
 
-        <div className="font-ui text-[10px] text-muted-foreground">
-          © 2025 Sarı Gold Kuyumculuk
+        <div className="font-ui text-[10px] text-muted-foreground flex gap-3 items-center">
+          <span>© 2025 Sarı Gold Kuyumculuk</span>
+          <Link to="/yasal" className="underline hover:text-primary">Yasal Uyarı & Gizlilik</Link>
         </div>
       </div>
     </footer>
