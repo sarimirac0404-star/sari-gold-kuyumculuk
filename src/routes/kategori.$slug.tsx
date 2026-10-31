@@ -77,7 +77,7 @@ export const Route = createFileRoute("/kategori/$slug")({
   component: CategoryPage,
   errorComponent: ({ error }) => (
     <div className="min-h-screen flex items-center justify-center text-foreground">
-      <p>Bir hata oluştu: {error.message}</p>
+      <p>Bir hata oluştu: {error instanceof Error ? error.message : String(error)}</p>
     </div>
   ),
   notFoundComponent: () => (

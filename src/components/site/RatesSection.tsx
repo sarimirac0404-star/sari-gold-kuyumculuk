@@ -124,6 +124,9 @@ export function RatesSection() {
               : allRates.map((r) => <RateCard key={r.name} rate={r} />)}
           </div>
         )}
+        <p className="mt-8 text-center font-ui text-xs text-muted-foreground max-w-2xl mx-auto">
+          Sitemizde yer alan fiyat ve kur bilgileri bilgilendirme amaçlıdır; piyasa koşullarına göre anlık değişiklik gösterebilir. Kesin alım-satım fiyatları mağazamızda teyit edilmektedir.
+        </p>
       </div>
     </section>
   );
