@@ -9,14 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as SariRouteImport } from './routes/sari'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SariRouteImport } from './routes/sari'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as YasalRouteImport } from './routes/yasal'
 import { Route as KategoriSlugRouteImport } from './routes/kategori.$slug'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SariRoute = SariRouteImport.update({
@@ -24,9 +25,14 @@ const SariRoute = SariRouteImport.update({
   path: '/sari',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const YasalRoute = YasalRouteImport.update({
+  id: '/yasal',
+  path: '/yasal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KategoriSlugRoute = KategoriSlugRouteImport.update({
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/sari': typeof SariRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/yasal': typeof YasalRoute
   '/kategori/$slug': typeof KategoriSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/sari': typeof SariRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/yasal': typeof YasalRoute
   '/kategori/$slug': typeof KategoriSlugRoute
 }
 export interface FileRoutesById {
@@ -52,30 +60,32 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/sari': typeof SariRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/yasal': typeof YasalRoute
   '/kategori/$slug': typeof KategoriSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sari' | '/sitemap.xml' | '/kategori/$slug'
+  fullPaths: '/' | '/sari' | '/sitemap.xml' | '/yasal' | '/kategori/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sari' | '/sitemap.xml' | '/kategori/$slug'
-  id: '__root__' | '/' | '/sari' | '/sitemap.xml' | '/kategori/$slug'
+  to: '/' | '/sari' | '/sitemap.xml' | '/yasal' | '/kategori/$slug'
+  id: '__root__' | '/' | '/sari' | '/sitemap.xml' | '/yasal' | '/kategori/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SariRoute: typeof SariRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  YasalRoute: typeof YasalRoute
   KategoriSlugRoute: typeof KategoriSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sari': {
@@ -85,11 +95,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SariRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/yasal': {
+      id: '/yasal'
+      path: '/yasal'
+      fullPath: '/yasal'
+      preLoaderRoute: typeof YasalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kategori/$slug': {
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SariRoute: SariRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  YasalRoute: YasalRoute,
   KategoriSlugRoute: KategoriSlugRoute,
 }
 export const routeTree = rootRouteImport
