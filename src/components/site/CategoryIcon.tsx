@@ -130,6 +130,18 @@ function Pendant({ className }: { className?: string }) {
   );
 }
 
+function Frame({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" className={className} fill="none" stroke={stroke} strokeWidth="1.5" aria-hidden="true">
+      <rect x="10" y="12" width="44" height="40" />
+      <rect x="16" y="18" width="32" height="28" />
+      <rect x="20" y="22" width="24" height="20" fill="hsl(var(--background))" opacity="0.5" />
+      <path d="M10 12 L16 18 M54 12 L48 18 M10 52 L16 46 M54 52 L48 46" strokeWidth="1" opacity="0.6" />
+      <circle cx="32" cy="32" r="4" opacity="0.4" />
+    </svg>
+  );
+}
+
 const map: Record<string, (p: { className?: string }) => React.ReactElement> = {
   yuzukler: Ring,
   kolyeler: Necklace,
@@ -140,6 +152,7 @@ const map: Record<string, (p: { className?: string }) => React.ReactElement> = {
   gerdanliklar: Gerdanlik,
   setler: Set,
   "kolye-uclari": Pendant,
+  cerceveler: Frame,
 };
 
 export function CategoryIcon({ slug, className }: Props) {

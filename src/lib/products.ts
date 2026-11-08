@@ -116,6 +116,14 @@ export const CATEGORIES: Category[] = [
     intro: "Zarif ve anlamlı kolye ucu tasarımları.",
     products: placeholders("Kolye Ucu", 6),
   },
+  {
+    slug: "cerceveler",
+    icon: "",
+    name: "Çerçeveler",
+    desc: "Altın Çerçeveler",
+    intro: "Anılarınıza değer katan altın çerçeve koleksiyonu.",
+    products: placeholders("Çerçeve", 6),
+  },
 ];
 
 export function getCategory(slug: string): Category | undefined {
