@@ -16,3 +16,4 @@ Sarı Gold Kuyumculuk, Cumhuriyet Cd., 04600 Eleşkirt/Ağrı adresinde hizmet v
 - [Gerdanlıklar](/kategori/gerdanliklar): Gerdanlık koleksiyonu.
 - [Setler](/kategori/setler): Takı setleri koleksiyonu.
 - [Kolye Uçları](/kategori/kolye-uclari): Kolye ucu koleksiyonu.
+- [Çerçeveler](/kategori/cerceveler): Altın çerçeve koleksiyonu.
