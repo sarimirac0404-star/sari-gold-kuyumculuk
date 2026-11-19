@@ -145,7 +145,7 @@ function ProductDialog({
   return (
     <>
     <Dialog open={open} onOpenChange={(o) => { if (!o) setZoomed(false); onOpenChange(o); }}>
-      <DialogContent className="max-w-3xl bg-card border-primary/40 p-0 overflow-hidden [&>button.absolute]:hidden">
+      <DialogContent className="max-w-3xl bg-card border-primary/40 p-0 overflow-hidden [&>button.absolute:not(.custom-close)]:hidden">
         {product && (
           <div className="grid md:grid-cols-2 gap-0">
             <button
@@ -200,7 +200,7 @@ function ProductDialog({
         )}
         <DialogClose
           aria-label="Kapat"
-          className="absolute right-3 top-3 z-50 flex items-center justify-center w-11 h-11 rounded-full bg-background/90 border border-primary/50 text-primary shadow-lg hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+          className="custom-close absolute right-3 top-3 z-50 flex items-center justify-center w-11 h-11 rounded-full bg-background/90 border border-primary/50 text-primary shadow-lg hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
         >
           <X className="h-5 w-5" strokeWidth={2.5} />
         </DialogClose>
@@ -209,7 +209,7 @@ function ProductDialog({
 
     {product?.image && (
       <Dialog open={zoomed} onOpenChange={setZoomed}>
-        <DialogContent className="max-w-[95vw] w-auto bg-transparent border-0 shadow-none p-0 [&>button.absolute]:hidden">
+        <DialogContent className="max-w-[95vw] w-auto bg-transparent border-0 shadow-none p-0 [&>button.absolute:not(.custom-close)]:hidden">
           <DialogTitle className="sr-only">{product.name}</DialogTitle>
           <DialogDescription className="sr-only">Büyütülmüş ürün fotoğrafı</DialogDescription>
           <img
@@ -219,7 +219,7 @@ function ProductDialog({
           />
           <DialogClose
             aria-label="Kapat"
-            className="absolute right-3 top-3 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-background/90 border border-primary/50 text-primary shadow-lg hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+            className="custom-close absolute right-3 top-3 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-background/90 border border-primary/50 text-primary shadow-lg hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <X className="h-6 w-6" strokeWidth={2.5} />
           </DialogClose>
